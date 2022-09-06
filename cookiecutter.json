@@ -1,0 +1,9 @@
+{
+    "project_name": "Project_X",
+    "__project_slug": "{{ cookiecutter.project_name|lower()|replace(' ', '_')|replace('-', '_') }}",
+    "project_description": "This is the project description.",
+    "author": "Harshad Hegde <hhegde@lbl.gov>",
+    "__author_name": "{{ cookiecutter.author|replace(r'<[^>]+>', '') }}",
+    "github_token_for_doc_deployment": "GH_TOKEN",
+    "github_token_for_pypi_deployment": "pypi_password"
+}
