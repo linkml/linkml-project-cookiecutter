@@ -5,6 +5,7 @@ import sys
 
 pwd = pathlib.Path(__file__).parent.resolve()
 sys.path.append(pwd)
+
 def get_name_from_author(value):
     """Returns just the name from name <email> in author."""
     return re.sub('<[^>]+>',"",value)
