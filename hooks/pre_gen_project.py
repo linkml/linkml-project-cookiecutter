@@ -2,6 +2,7 @@
 
 import re
 import sys
+from jinja2 import environment
 
 MODULE_REGEX = re.compile(r'^[_a-zA-Z][_a-zA-Z0-9]+$')
 
@@ -22,4 +23,8 @@ if not MODULE_REGEX.match(project_name):
         f'WARNING: {project_name} is not a valid Python module name. Using "_" instead of {invalid_char} for module name.'
     )
 
+def get_name_from_author(author):
+    """Returns just the name from name <email> in author."""
+    return re.sub('<[^>]+>',"",author)
     
+environment.filters["get_name_from_author"] = get_name_from_author
