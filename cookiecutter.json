@@ -3,6 +3,6 @@
     "__project_slug": "{{ cookiecutter.project_name|lower()|replace(' ', '_')|replace('-', '_') }}",
     "project_description": "This is the project description.",
     "author": "Harshad Hegde <hhegde@lbl.gov>",
-    "__author_name": "{{ cookiecutter.author|regex_replace('<[^>]+>', '') }}",
+    "__author_name": "{{ cookiecutter.author|replace('<[^>]+>', '') }}",
     "github_token_for_pypi_deployment": "PYPI_PASSWORD"
 }
