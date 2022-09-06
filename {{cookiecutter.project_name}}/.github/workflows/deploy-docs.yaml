@@ -26,5 +26,5 @@ jobs:
     - name: Build documentation.
       run: |
         touch docs/.nojekyll
-        poetry run gen-doc -d docs src/schema/{{cookiecutter.__project_slug}}.yaml
+        poetry run gen-doc -d docs src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__project_slug}}.yaml
         poetry run mkdocs gh-deploy
