@@ -1,0 +1,68 @@
+type Address
+  {
+    street: String
+    city: String
+    postalCode: String
+  }
+
+type FamilialRelationship
+  {
+    startedAtTime: Date
+    endedAtTime: Date
+    relatedTo: String
+    type: FamilialRelationshipType!
+    relatedTo: Person!
+  }
+
+interface HasAliases
+  {
+    aliases: [String]
+  }
+
+type NamedThing
+  {
+    id: String!
+    name: String
+    description: String
+    image: String
+  }
+
+type Organization implements HasAliases
+  {
+    id: String!
+    name: String
+    description: String
+    image: String
+    missionStatement: String
+    foundingDate: String
+    aliases: [String]
+  }
+
+type Person implements HasAliases
+  {
+    id: String!
+    name: String
+    description: String
+    image: String
+    primaryEmail: String
+    birthDate: String
+    ageInYears: Integer
+    currentAddress: Address
+    hasFamilialRelationships: [FamilialRelationship]
+    aliases: [String]
+  }
+
+type Registry
+  {
+    persons: [Person]
+    organizations: [Organization]
+  }
+
+type Relationship
+  {
+    startedAtTime: Date
+    endedAtTime: Date
+    relatedTo: String
+    type: String
+  }
+

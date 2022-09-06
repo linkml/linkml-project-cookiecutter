@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "{{cookiecutter.__project_slug}}"
+version = "0.1.0"
+description = "Enter description of your project here"
+authors = ["{{cookiecutter.author}}"]
+license = "MIT"
+include = ["README.md", "src/schema", "project"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+linkml-runtime = "^1.1.24"
+
+[tool.poetry.dev-dependencies]
+linkml = "^1.2.6"
+mkdocs-material = "^8.2.8"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

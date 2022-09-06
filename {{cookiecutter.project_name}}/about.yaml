@@ -1,0 +1,3 @@
+name: {{cookiecutter.__project_slug}}
+description: {{cookiecutter.project_description}}
+source_schema_path: src/schema/{{cookiecutter.__project_slug}}.yaml

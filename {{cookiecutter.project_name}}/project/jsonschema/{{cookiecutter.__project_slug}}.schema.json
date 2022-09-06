@@ -1,0 +1,243 @@
+{
+   "$defs": {
+      "Address": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "city": {
+               "type": "string"
+            },
+            "postal_code": {
+               "type": "string"
+            },
+            "street": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "Address",
+         "type": "object"
+      },
+      "FamilialRelationship": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "ended_at_time": {
+               "format": "date",
+               "type": "string"
+            },
+            "related_to": {
+               "type": "string"
+            },
+            "started_at_time": {
+               "format": "date",
+               "type": "string"
+            },
+            "type": {
+               "$ref": "#/$defs/FamilialRelationshipType"
+            }
+         },
+         "required": [
+            "type",
+            "related_to"
+         ],
+         "title": "FamilialRelationship",
+         "type": "object"
+      },
+      "FamilialRelationshipType": {
+         "description": "",
+         "enum": [
+            "SIBLING_OF",
+            "PARENT_OF",
+            "CHILD_OF"
+         ],
+         "title": "FamilialRelationshipType",
+         "type": "string"
+      },
+      "NamedThing": {
+         "additionalProperties": false,
+         "description": "A generic grouping for any identifiable entity",
+         "properties": {
+            "description": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "image": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "NamedThing",
+         "type": "object"
+      },
+      "Organization": {
+         "additionalProperties": false,
+         "description": "An organization such as a company or university",
+         "properties": {
+            "aliases": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "description": {
+               "type": "string"
+            },
+            "founding_date": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "image": {
+               "type": "string"
+            },
+            "mission_statement": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Organization",
+         "type": "object"
+      },
+      "Person": {
+         "additionalProperties": false,
+         "description": "A person (alive, dead, undead, or fictional).",
+         "properties": {
+            "age_in_years": {
+               "maximum": 999,
+               "minimum": 0,
+               "type": "integer"
+            },
+            "aliases": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "birth_date": {
+               "type": "string"
+            },
+            "current_address": {
+               "$ref": "#/$defs/Address",
+               "description": "The address at which a person currently lives"
+            },
+            "description": {
+               "type": "string"
+            },
+            "has_familial_relationships": {
+               "items": {
+                  "$ref": "#/$defs/FamilialRelationship"
+               },
+               "type": "array"
+            },
+            "id": {
+               "type": "string"
+            },
+            "image": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            },
+            "primary_email": {
+               "pattern": "^\\S+@[\\S+\\.]+\\S+",
+               "type": "string"
+            }
+         },
+         "required": [
+            "id"
+         ],
+         "title": "Person",
+         "type": "object"
+      },
+      "PersonStatus": {
+         "description": "",
+         "enum": [
+            "ALIVE",
+            "DEAD",
+            "UNKNOWN"
+         ],
+         "title": "PersonStatus",
+         "type": "string"
+      },
+      "Registry": {
+         "additionalProperties": false,
+         "description": "Top level data container",
+         "properties": {
+            "organizations": {
+               "items": {
+                  "$ref": "#/$defs/Organization"
+               },
+               "type": "array"
+            },
+            "persons": {
+               "items": {
+                  "$ref": "#/$defs/Person"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "Registry",
+         "type": "object"
+      },
+      "Relationship": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "ended_at_time": {
+               "format": "date",
+               "type": "string"
+            },
+            "related_to": {
+               "type": "string"
+            },
+            "started_at_time": {
+               "format": "date",
+               "type": "string"
+            },
+            "type": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "Relationship",
+         "type": "object"
+      }
+   },
+   "$id": "https://w3id.org/my_org/my_datamodel",
+   "$schema": "http://json-schema.org/draft-07/schema#",
+   "additionalProperties": true,
+   "metamodel_version": "1.7.0",
+   "properties": {
+      "organizations": {
+         "items": {
+            "$ref": "#/$defs/Organization"
+         },
+         "type": "array"
+      },
+      "persons": {
+         "items": {
+            "$ref": "#/$defs/Person"
+         },
+         "type": "array"
+      }
+   },
+   "required": [],
+   "title": "my_datamodel",
+   "type": "object",
+   "version": null
+}

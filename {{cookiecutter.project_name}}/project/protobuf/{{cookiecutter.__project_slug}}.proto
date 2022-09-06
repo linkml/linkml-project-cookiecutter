@@ -1,0 +1,60 @@
+message Address
+ {
+  string street = 0
+  string city = 0
+  string postalCode = 0
+ }
+message FamilialRelationship
+ {
+  date startedAtTime = 0
+  date endedAtTime = 0
+  string relatedTo = 0
+  familialRelationshipType type = 0
+  person relatedTo = 0
+ }
+// A generic grouping for any identifiable entity
+message NamedThing
+ {
+  string id = 0
+  string name = 0
+  string description = 0
+  string image = 0
+ }
+// An organization such as a company or university
+message Organization
+ {
+  string id = 0
+  string name = 0
+  string description = 0
+  string image = 0
+  string missionStatement = 0
+  string foundingDate = 0
+ repeated  string aliases = 0
+ }
+// A person (alive, dead, undead, or fictional).
+message Person
+ {
+  string id = 0
+  string name = 0
+  string description = 0
+  string image = 0
+  string primaryEmail = 0
+  string birthDate = 0
+  integer ageInYears = 0
+  address currentAddress = 0
+ repeated  familialRelationship hasFamilialRelationships = 0
+ repeated  string aliases = 0
+ }
+// Top level data container
+message Registry
+ {
+ repeated  person persons = 0
+ repeated  organization organizations = 0
+ }
+message Relationship
+ {
+  date startedAtTime = 0
+  date endedAtTime = 0
+  string relatedTo = 0
+  string type = 0
+ }

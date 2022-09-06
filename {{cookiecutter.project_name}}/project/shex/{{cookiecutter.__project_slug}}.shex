@@ -1,0 +1,126 @@
+BASE <https://w3id.org/my_org/my_datamodel/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX schema: <http://schema.org/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+
+
+linkml:String xsd:string
+
+linkml:Integer xsd:integer
+
+linkml:Boolean xsd:boolean
+
+linkml:Float xsd:float
+
+linkml:Double xsd:double
+
+linkml:Decimal xsd:decimal
+
+linkml:Time xsd:dateTime
+
+linkml:Date xsd:date
+
+linkml:Datetime xsd:dateTime
+
+linkml:DateOrDatetime linkml:DateOrDatetime
+
+linkml:Uriorcurie IRI
+
+linkml:Uri IRI
+
+linkml:Ncname xsd:string
+
+linkml:Objectidentifier IRI
+
+linkml:Nodeidentifier NONLITERAL
+
+<https://w3id.org/my_org/my_datamodelAddress> CLOSED {
+    (  $<https://w3id.org/my_org/my_datamodelAddress_tes> (  <https://w3id.org/my_org/my_datamodelstreet> @linkml:String ? ;
+          <https://w3id.org/my_org/my_datamodelcity> @linkml:String ? ;
+          <https://w3id.org/my_org/my_datamodelpostal_code> @linkml:String ?
+       ) ;
+       rdf:type [ schema:PostalAddress ] ?
+    )
+}
+
+<https://w3id.org/my_org/my_datamodelFamilialRelationship> CLOSED {
+    (  $<https://w3id.org/my_org/my_datamodelFamilialRelationship_tes> (  &<https://w3id.org/my_org/my_datamodelRelationship_tes> ;
+          rdf:type [ <https://w3id.org/my_org/my_datamodelRelationship> ] ? ;
+          <https://w3id.org/my_org/my_datamodeltype> @<https://w3id.org/my_org/my_datamodelFamilialRelationshipType> ;
+          <https://w3id.org/my_org/my_datamodelrelated_to> @<https://w3id.org/my_org/my_datamodelPerson>
+       ) ;
+       rdf:type [ <https://w3id.org/my_org/my_datamodelFamilialRelationship> ] ?
+    )
+}
+
+<https://w3id.org/my_org/my_datamodelHasAliases> {
+    (  $<https://w3id.org/my_org/my_datamodelHasAliases_tes> <https://w3id.org/my_org/my_datamodelaliases> @linkml:String * ;
+       rdf:type [ <https://w3id.org/my_org/my_datamodelHasAliases> ] ?
+    )
+}
+
+<https://w3id.org/my_org/my_datamodelNamedThing>  (
+    CLOSED {
+       (  $<https://w3id.org/my_org/my_datamodelNamedThing_tes> (  schema:name @linkml:String ? ;
+             schema:description @linkml:String ? ;
+             schema:image @linkml:String ?
+          ) ;
+          rdf:type [ <https://w3id.org/my_org/my_datamodelNamedThing> ]
+       )
+    } OR @<https://w3id.org/my_org/my_datamodelOrganization> OR @<https://w3id.org/my_org/my_datamodelPerson>
+)
+
+<https://w3id.org/my_org/my_datamodelOrganization> CLOSED {
+    (  $<https://w3id.org/my_org/my_datamodelOrganization_tes> (  &<https://w3id.org/my_org/my_datamodelNamedThing_tes> ;
+          rdf:type [ <https://w3id.org/my_org/my_datamodelNamedThing> ] ? ;
+          &<https://w3id.org/my_org/my_datamodelHasAliases_tes> ;
+          rdf:type [ <https://w3id.org/my_org/my_datamodelHasAliases> ] ? ;
+          <https://w3id.org/my_org/my_datamodelmission_statement> @linkml:String ? ;
+          <https://w3id.org/my_org/my_datamodelfounding_date> @linkml:String ? ;
+          <https://w3id.org/my_org/my_datamodelaliases> @linkml:String *
+       ) ;
+       rdf:type [ schema:Organization ]
+    )
+}
+
+<https://w3id.org/my_org/my_datamodelPerson> CLOSED {
+    (  $<https://w3id.org/my_org/my_datamodelPerson_tes> (  &<https://w3id.org/my_org/my_datamodelNamedThing_tes> ;
+          rdf:type [ <https://w3id.org/my_org/my_datamodelNamedThing> ] ? ;
+          &<https://w3id.org/my_org/my_datamodelHasAliases_tes> ;
+          rdf:type [ <https://w3id.org/my_org/my_datamodelHasAliases> ] ? ;
+          schema:email @linkml:String ? ;
+          schema:birthDate @linkml:String ? ;
+          <https://w3id.org/my_org/my_datamodelage_in_years> @linkml:Integer ? ;
+          <https://w3id.org/my_org/my_datamodelcurrent_address> @<https://w3id.org/my_org/my_datamodelAddress> ? ;
+          <https://w3id.org/my_org/my_datamodelhas_familial_relationships>
+          @<https://w3id.org/my_org/my_datamodelFamilialRelationship> * ;
+          <https://w3id.org/my_org/my_datamodelaliases> @linkml:String *
+       ) ;
+       rdf:type [ schema:Person ]
+    )
+}
+
+<https://w3id.org/my_org/my_datamodelRegistry> CLOSED {
+    (  $<https://w3id.org/my_org/my_datamodelRegistry_tes> (  <https://w3id.org/my_org/my_datamodelpersons>
+          @<https://w3id.org/my_org/my_datamodelPerson> * ;
+          <https://w3id.org/my_org/my_datamodelorganizations> @<https://w3id.org/my_org/my_datamodelOrganization> *
+       ) ;
+       rdf:type [ <https://w3id.org/my_org/my_datamodelRegistry> ] ?
+    )
+}
+
+<https://w3id.org/my_org/my_datamodelRelationship>  (
+    CLOSED {
+       (  $<https://w3id.org/my_org/my_datamodelRelationship_tes> (  prov:startedAtTime @linkml:Date ? ;
+             prov:endedAtTime @linkml:Date ? ;
+             <https://w3id.org/my_org/my_datamodelrelated_to> @linkml:String ? ;
+             <https://w3id.org/my_org/my_datamodeltype> @linkml:String ?
+          ) ;
+          rdf:type [ <https://w3id.org/my_org/my_datamodelRelationship> ] ?
+       )
+    } OR @<https://w3id.org/my_org/my_datamodelFamilialRelationship>
+)
+
+
