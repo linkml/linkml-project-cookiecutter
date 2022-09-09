@@ -24,6 +24,7 @@ help: status
 	@echo "make install -- install dependencies"
 	@echo "make setup -- initial setup"
 	@echo "make test -- runs tests"
+	@echo "make lint -- perfom linting"
 	@echo "make testdoc -- builds docs and runs local test server"
 	@echo "make deploy -- deploys site"
 	@echo "make update -- updates linkml version"
@@ -50,6 +51,9 @@ gen-project: $(PYMODEL)
 
 test:
 	$(RUN) gen-project -d tmp $(SOURCE_SCHEMA_PATH) 
+
+lint:
+	$(RUN) linkml-lint $(SOURCE_SCHEMA_PATH) 
 
 check-config:
 	@(grep my-datamodel about.yaml > /dev/null && printf "\n**Project not configured**:\n\n  - Remember to edit 'about.yaml'\n\n" || exit 0)

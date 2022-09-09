@@ -1,7 +1,10 @@
 {
-    "project_name": "Project_X",
+    "project_name": "my-awesome-schema",
     "__project_slug": "{{ cookiecutter.project_name|lower()|replace(' ', '_')|replace('-', '_') }}",
+    "github_org": "my-org",
     "project_description": "This is the project description.",
     "author": "Harshad Hegde <hhegde@lbl.gov>",
-    "github_token_for_pypi_deployment": "PYPI_PASSWORD"
+    "main_schema_class": "Person",
+    "create_python_classes": "Yes/No",
+    "github_token_for_pypi_deployment": "PYPI_PASSWORD (leave blank if not a python project)"
 }
