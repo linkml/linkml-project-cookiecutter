@@ -1,4 +1,4 @@
-id: https://w3id.org/{{cookiecutter.my_org}}/{{cookiecutter.project_name}}
+id: https://w3id.org/{{cookiecutter.github_org}}/{{cookiecutter.project_name}}
 name: {{cookiecutter.project_name}}
 title: {{cookiecutter.project_name}}
 description: |-
@@ -7,7 +7,7 @@ imports:
   - linkml:types
   
 prefixes:
-  {{cookiecutter.__project_slug}}: https://w3id.org/{{cookiecutter.my_org}}/{{cookiecutter.project_name}}/
+  {{cookiecutter.__project_slug}}: https://w3id.org/{{cookiecutter.github_org}}/{{cookiecutter.project_name}}/
   linkml: https://w3id.org/linkml/
   biolink: https://w3id.org/biolink/
   schema: http://schema.org/

@@ -15,5 +15,5 @@ nav:
 #  - Home: home.md
   - Index: index.md
   - About: about.md
-site_url: https://{{cookiecutter.my_org}}.github.io/{{cookiecutter.project_name}}
-repo_url: https://github.com/{{cookiecutter.my_org}}/{{cookiecutter.project_name}}
+site_url: https://{{cookiecutter.github_org}}.github.io/{{cookiecutter.project_name}}
+repo_url: https://github.com/{{cookiecutter.github_org}}/{{cookiecutter.project_name}}
