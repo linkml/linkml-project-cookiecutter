@@ -2,7 +2,7 @@ site_name: "{{cookiecutter.project_name}}"
 theme:
   name: material
   analytics:
-    gtag: G-2SYBSJVZ23
+    gtag: {{cookiecutter.google_analytics_gtag}}
 #  palette:
 #    scheme: slate
 #    primary: cyan

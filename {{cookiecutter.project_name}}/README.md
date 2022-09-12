@@ -6,6 +6,18 @@
 
 * [https://{{cookiecutter.github_org}}.github.io/{{cookiecutter.project_name}}](https://{{cookiecutter.github_org}}.github.io/{{cookiecutter.project_name}})
 
+## Repository Structure
+
+* [examples/](examples/) - example data
+* [project/](project/) - project files (do not edit these)
+* [src/](src/) - source files (edit these)
+    * [{{cookiecutter.__project_slug}}](src/{{cookiecutter.__project_slug}})
+        * [schema](src/{{cookiecutter.__project_slug}}/schema) -- LinkML schema (edit this)
+{% if cookiecutter.create_python_classes == "Yes" -%}
+        * [datamodel](src/{{cookiecutter.__project_slug}}/datamodel) -- Generated python datamodel
+* [tests](tests/) - python tests
+{%- endif %}
+
 ## Developer Documentation
 
 <details>
