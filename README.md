@@ -17,7 +17,7 @@ A [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) template for pr
 
 ### Use cruft to generate a new project:
 
-`cruft https://github.com/linkml/linkml-project-cookiecutter`
+`cruft create https://github.com/linkml/linkml-project-cookiecutter`
 
 Then follow the instructions on the screen, answering questions as best you can.
 
