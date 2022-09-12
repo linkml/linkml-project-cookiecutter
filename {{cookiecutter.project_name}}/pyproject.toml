@@ -3,7 +3,7 @@ name = "{{cookiecutter.__project_slug}}"
 version = "0.1.0"
 description = "Enter description of your project here"
 authors = ["{{cookiecutter.__author}}"]
-license = "{{cookiecutter.__author}}"
+license = "{{cookiecutter.license}}"
 include = ["README.md", "src/{{cookiecutter.__project_slug}}/schema", "project"]
 
 [tool.poetry.dependencies]
