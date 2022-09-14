@@ -1,6 +1,6 @@
 {
     "project_name": "my-awesome-schema",
-    "__project_slug": "{{ cookiecutter.project_name|lower()|replace(' ', '_')|replace('-', '_')  }}",
+    "__project_slug": "{{ cookiecutter.project_name|lower()|replace(' ', '_')|replace('-', '_') }}",
     "github_org": "my-org",
     "__source_path": "src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__project_slug}}.yaml",
     "project_description": "This is the project description.",
@@ -17,6 +17,6 @@
     ],
     "google_sheet_id": "1wVoaiFg47aT9YWNeRfTZ8tYHN8s8PAuDx5i2HUcDpvQ",
     "google_sheet_tabs": "personinfo enums",
-    "__google_sheet_module": "{{ cookiecutter.google_sheet_tabs|lower()|replace(' ', '_')|replace('-', '_')  }}",
+    "__google_sheet_module": "{{ cookiecutter.google_sheet_tabs|lower()|replace(' ', '_')|replace('-', '_') }}",
     "github_token_for_pypi_deployment": "PYPI_PASSWORD (leave blank if not a python project)"
 }
