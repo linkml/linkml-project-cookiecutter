@@ -1,5 +1,5 @@
 {
-    "project_name": "my-awesome-schema",
+    "project_name": "my awesome schema",
     "__project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
     "github_org": "my-org",
     "__source_path": "src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__project_slug}}.yaml",
