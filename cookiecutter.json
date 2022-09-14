@@ -17,5 +17,6 @@
     ],
     "google_sheet_id": "1wVoaiFg47aT9YWNeRfTZ8tYHN8s8PAuDx5i2HUcDpvQ",
     "google_sheet_tabs": "personinfo enums",
+    "__google_sheet_module": "{{ cookiecutter.google_sheet_tabs|lower }}",
     "github_token_for_pypi_deployment": "PYPI_PASSWORD (leave blank if not a python project)"
 }
