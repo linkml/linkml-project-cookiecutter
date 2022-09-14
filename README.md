@@ -13,6 +13,7 @@ A [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) template for pr
 
 1b: [install cruft](https://cruft.github.io/cruft/):
 
+`pip3 install click==8.0.4`
 `pip3 install cruft`
 
 ### Use cruft to generate a new project:
