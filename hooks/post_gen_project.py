@@ -8,7 +8,7 @@ from pathlib import Path
 shutil.rmtree("licenses")
 
 project_slug = '{{ cookiecutter.__project_slug}}'
-create_python_classes = '{{ cookiecutter.create_python_classes}}'
+create_python_classes = '{{ cookiecutter.create_python_classes }}'
 
 if create_python_classes == "No":
     print("TODO - cleanup python")

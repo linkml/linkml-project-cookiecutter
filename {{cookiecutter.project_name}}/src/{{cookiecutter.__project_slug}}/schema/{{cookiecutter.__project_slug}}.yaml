@@ -32,13 +32,12 @@ classes:
       - id
       - name
       - description
-    class_uri:
-     - schema:Thing
+    class_uri: schema:Thing
 
   {{cookiecutter.main_schema_class}}:
     is_a: NamedThing
     description: >-
-      Represents a {{cookiecutter.main_schema_class}}:
+      Represents a {{cookiecutter.main_schema_class}}
     slots:
       - primary_email
       - birth_date
