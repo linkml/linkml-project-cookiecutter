@@ -89,8 +89,14 @@ gen-examples:
 	cp src/data/examples/* $(EXAMPLEDIR)
 
 # generates all project files
-gen-project: $(PYMODEL) compile-sheets
-	$(RUN) gen-project -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+{% if {{ cookiecutter.use_schemasheets }} == "Yes" %}
+    gen-project: $(PYMODEL) compile-sheets
+		$(RUN) gen-project -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+{% else %}
+	gen-project: $(PYMODEL)
+		$(RUN) gen-project -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+{% endif %}
+
 
 test: test-schema test-python
 test-schema:
