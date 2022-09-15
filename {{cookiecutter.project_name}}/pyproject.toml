@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "{{cookiecutter.__project_slug}}"
 version = "0.1.0"
-description = "{{cookiecutter.description}}"
+description = "{{cookiecutter.project_description}}"
 authors = ["{{cookiecutter.__author}}"]
 license = "{{cookiecutter.license}}"
 readme = "README.md"
