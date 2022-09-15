@@ -4,7 +4,7 @@ import glob
 import unittest
 
 from linkml_runtime.loaders import yaml_loader
-from my_awesome_schema.datamodel import {{cookiecutter.main_schema_class}}
+from {{cookiecutter.__project_slug}}.datamodel import {{cookiecutter.main_schema_class}}
 
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 DATA_DIR = os.path.join(ROOT, "src", "data", "examples")
