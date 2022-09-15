@@ -26,11 +26,8 @@ poetry install # this creates your virtual environment.
 
 ### Step 2: Install the cruft tool in your virtual environment
 This tool will help you keep your project up to date with the latest LinkML tools and best practices.
-
-```bash
 In your poetry virtual environment:
 
-2b: [install cruft](https://cruft.github.io/cruft/):
 ```bash
 poetry add cruft
 ```
