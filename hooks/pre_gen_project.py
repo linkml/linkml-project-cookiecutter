@@ -17,7 +17,7 @@ if not MODULE_REGEX.match(project_name):
             f'ERROR: {project_name} is not a valid Python module name. Try again with a valid project name.'
         )
         # Exit to cancel project
-        sys.exit(1)
+        # sys.exit(1)
     print(
         f'WARNING: {project_name} is not a valid Python module name. Using "_" instead of {invalid_char} for module name.'
     )
