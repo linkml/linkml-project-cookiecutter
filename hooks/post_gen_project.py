@@ -14,6 +14,7 @@ if create_python_classes == "No":
     print("TODO - cleanup python")
 
 print("** PROJECT CREATION COMPLETE **\n")
+print(f"** {project_slug} **\n")
 print("Next steps:")
 print("cd {{cookiecutter.project_name}}")
 print("make setup")
