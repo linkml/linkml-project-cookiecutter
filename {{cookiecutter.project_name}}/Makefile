@@ -80,7 +80,7 @@ site: gen-project gendoc
 deploy: all mkd-gh-deploy
 
 compile-sheets:
-{% if cookiecutter.use_schemasheets %}
+{% if cookiecutter.use_schemasheets == "Yes" %}
 	$(RUN) sheets2linkml --gsheet-id $(SHEET_ID) $(SHEET_TABS) > $(SHEET_MODULE_PATH).tmp && mv $(SHEET_MODULE_PATH).tmp $(SHEET_MODULE_PATH)
 {% endif %}
 
