@@ -105,20 +105,30 @@ nano src/my_awesome_schema/schema/my_awesome_schema.yaml
 make test
 ```
 
-### Step 7: Test the documentation
+### Step 7: Auto-generate your documentation locally.
+LinkML generates schema documenation automatically.  Step 7 here, allows you to preview the documentation
+that LinkML generates before pushing to GitHub.  Note, this template comes with GitHub
+Actions that autogenerate this documentation on release of your schema repository at a URL like this one:
+https://my-user-or-organization.github.io/my-awesome-schema/ 
+
+```bash
 
 ```bash
 make serve
 ```
 
-The result of the 'make server' command will be a URL that you can use to view the documentation.  For example:
-
-
-```bash
-
 ### Step 8: Create a github project
 
-Go to https://github.com/new and follow the instructions
+8a: Go to https://github.com/new and follow the instructions, being sure to NOT add a README or .gitignore file (this
+cookiecutter template will take care of this for you)
+
+8b: Add the remote to your local git repository`
+
+```bash
+git remote add origin https://github.com/my-user-or-organization/my-awesome-schema.git
+git branch -M main
+git push -u origin main
+```
 
 ### Step 9: Deploy documentation
 
