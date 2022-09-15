@@ -5,7 +5,12 @@ A [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) template for pr
 
 ## Standard Protocol
 
-### Step 1: Install cruft and poetry
+### Step 1: Create a virtual environment
+
+1: Create a Python virtual environment. You can read [this 
+guide](https://realpython.com/python-virtual-environments-a-primer/) to learn more about them and how to create one.
+
+After creating a virtual environment, it's as simple as:
 
 1a: [install poetry](https://python-poetry.org/docs/):
 
@@ -14,6 +19,7 @@ A [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) template for pr
 1b: [install cruft](https://cruft.github.io/cruft/):
 
 `pip3 install cruft`
+
 
 ### Use cruft to generate a new project:
 
