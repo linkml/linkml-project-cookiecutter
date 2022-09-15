@@ -4,16 +4,16 @@
     "github_org": "my-org",
     "__source_path": "src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__project_slug}}.yaml",
     "project_description": "This is the project description.",
-    "full_name": "Harshad Hegde",
-    "email": "hhegde@lbl.gov",
+      "full_name": "My Name",
+      "email": "my-name@my-org.org",
     "__author": "{{cookiecutter.full_name}} <{{cookiecutter.email}}>",
     "license": ["MIT", "BSD-3", "GNU GPL v3.0", "Apache Software License 2.0"],
     "google_analytics_gtag": "G-2SYBSJVZ23",
     "main_schema_class": "Person",
     "create_python_classes": ["Yes", "No"],
     "use_schemasheets": [
-        "Yes",
-        "No (next two questions are ignored)"
+        "No (next two questions are ignored)",
+        "Yes"
     ],
     "google_sheet_id": "1wVoaiFg47aT9YWNeRfTZ8tYHN8s8PAuDx5i2HUcDpvQ",
     "google_sheet_tabs": "personinfo enums",
