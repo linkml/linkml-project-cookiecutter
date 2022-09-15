@@ -12,7 +12,7 @@
     "main_schema_class": "Person",
     "create_python_classes": ["Yes", "No"],
     "use_schemasheets": [
-        "No,
+        "No",
         "Yes"
     ],
     "google_sheet_id": "1wVoaiFg47aT9YWNeRfTZ8tYHN8s8PAuDx5i2HUcDpvQ",
