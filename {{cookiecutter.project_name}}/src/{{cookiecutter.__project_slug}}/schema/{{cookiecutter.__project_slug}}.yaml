@@ -19,7 +19,7 @@ default_range: string
 
 imports:
   - linkml:types
-{%- if cookiecutter.use_schemasheets == "Yes" %}
+{%- if {{ cookiecutter.use_schemasheets }} == "Yes" %}
   - {{cookiecutter.__google_sheet_module}}
 {%- else %}
 
