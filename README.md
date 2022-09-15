@@ -26,6 +26,7 @@ poetry install # this creates your virtual environment.
 
 ### Step 2: Install the cruft tool in your virtual environment
 This tool will help you keep your project up to date with the latest LinkML tools and best practices.
+
 In your poetry virtual environment:
 
 ```bash
@@ -110,8 +111,6 @@ LinkML generates schema documenation automatically.  Step 7 here, allows you to 
 that LinkML generates before pushing to GitHub.  Note, this template comes with GitHub
 Actions that autogenerate this documentation on release of your schema repository at a URL like this one:
 https://my-user-or-organization.github.io/my-awesome-schema/ 
-
-```bash
 
 ```bash
 make serve
