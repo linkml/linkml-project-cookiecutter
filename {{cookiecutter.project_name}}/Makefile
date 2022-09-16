@@ -15,6 +15,7 @@ SRC = src
 DEST = project
 PYMODEL = $(SRC)/$(SCHEMA_NAME)/datamodel
 DOCDIR = docs
+DOCTEMPLATESDIR = doc-templates
 EXAMPLEDIR = examples
 SHEET_MODULE = {{cookiecutter.__google_sheet_module}}
 SHEET_ID = $(shell sh ./utils/get-value.sh google_sheet_id)
@@ -126,9 +127,9 @@ $(PYMODEL):
 $(DOCDIR):
 	mkdir -p $@
 
-gendoc: $(DOCDIR)
+gendoc: $(DOCDIR) $(DOCTEMPLATESDIR)
 	cp $(SRC)/docs/*md $(DOCDIR) ; \
-	$(RUN) gen-doc -d $(DOCDIR) $(SOURCE_SCHEMA_PATH)
+	$(RUN) gen-doc -d $(DOCDIR) $(SOURCE_SCHEMA_PATH) --template-directory $(DOCTEMPLATESDIR)
 
 testdoc: gendoc serve
 
