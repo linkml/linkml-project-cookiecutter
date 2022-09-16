@@ -5,24 +5,45 @@ A [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) template for pr
 
 ## Standard Protocol
 
-### Step 1: Install cruft and poetry
+### Step 1: Create a virtual environment
 
-1a: [install poetry](https://python-poetry.org/docs/):
+Create a Python virtual environment. You can read [this 
+guide](https://realpython.com/python-virtual-environments-a-primer/) to learn more about them and how to create one.
+We suggest using poetry, but you can use any tool you like.  Please note, most LinkML tools work best in Python 3.8 or higher.
 
-`curl -sSL https://install.python-poetry.org | python3 -`
+An example using poetry:
+```bash
+curl -sSL https://install.python-poetry.org | python3 -
+```
 
-1b: [install cruft](https://cruft.github.io/cruft/):
+```bash
+mkdir linkml-projects
+cd linkml-projects
+poetry init # creates a new poetry project with pyproject.toml.  Note this is not a new linkml project, it is just a virtual environment to install cruft.
+poetry add click==8.0.4
+poetry install # this creates your virtual environment.
+```
 
-`pip3 install cruft`
+### Step 2: Install the cruft tool in your virtual environment
+This tool will help you keep your project up to date with the latest LinkML tools and best practices.
 
-### Use cruft to generate a new project:
+In your poetry virtual environment:
 
-`cruft create https://github.com/linkml/linkml-project-cookiecutter`
+```bash
+poetry add cruft
+```
 
-Then follow the instructions on the screen, answering questions as best you can.
+### Step 3:  Use cruft to create your brand new LinkML project:
 
-This kickstarts an interactive session where you declare the following:
+In your poetry virtual environment:
 
+```bash
+poetry shell
+cruft create https://github.com/linkml/linkml-project-cookiecutter
+```
+
+You will be prompted for a few values.  The defaults are fine for most projects, but do name your project something 
+that makes sense to you!  The interactive session will guide you through the process:
 
 - `project_name`: Name of the project, use kebab-case with no spaces. Suggestions:
     - `patient-observation-schema`
@@ -63,53 +84,71 @@ This will generate the project folder very similar to what is mentioned in the [
 
 See [linkml/linkml-project-cookiecutter](https://github.com/linkml/linkml-project-cookiecutter) for more docs.
 
-### Setup the project
+### Step 4: Setup the LinkML project
 
 Change to the folder your generated project is in
 
-type:
-
 ```bash
+cd linkml-projects/my-awesome-schema  # using the folder example above
 make setup
 ```
 
-### Edit the schema
+### Step 5: Edit the schema
 
-Edit the schema in the src folder
+Edit the schema (the .yaml file) in the linkml-projects/my-awesome-schema/src/my_awesome_schema/schema folder
+```bash
+nano src/my_awesome_schema/schema/my_awesome_schema.yaml
+```
 
-### Validate the schema
+### Step 6: Validate the schema
 
-`make test`
+```bash
+make test
+```
 
-### Test the documentation
+### Step 7: Auto-generate your documentation locally.
+LinkML generates schema documenation automatically.  Step 7 here, allows you to preview the documentation
+that LinkML generates before pushing to GitHub.  Note, this template comes with GitHub
+Actions that autogenerate this documentation on release of your schema repository at a URL like this one:
+https://my-user-or-organization.github.io/my-awesome-schema/ 
 
-`make server`
+```bash
+make serve
+```
 
-An look at the URL provided
+### Step 8: Create a github project
 
-### Create a github project
+8a: Go to https://github.com/new and follow the instructions, being sure to NOT add a README or .gitignore file (this
+cookiecutter template will take care of this for you)
 
-Go to https://github.com/new and follow the instructions
+8b: Add the remote to your local git repository`
 
-### Deploy documentation
+```bash
+git remote add origin https://github.com/my-user-or-organization/my-awesome-schema.git
+git branch -M main
+git push -u origin main
+```
+
+### Step 9: Deploy documentation
 
 `make deploy`
 
-### Register the schema
+### Step 10: Register the schema
 
 See [How to register a schema](../faq/contributing)
 
-## Alternative protocols
-
 ## Keeping your project up to date
 
-In order to be up-to-date with the template, first check if there is a mismatch between the project's boilerplate code and the template by running:
+In order to be up-to-date with the template, first check if there is a mismatch between the project's boilerplate 
+code and the template by running:
 
-```
+```bash
+poetry shell
 cruft check
 ```
 
-This indicates if there is a difference between the current project's boilerplate code and the latest version of the project template. If the project is up-to-date with the template:
+This indicates if there is a difference between the current project's boilerplate code and the latest version of the 
+project template. If the project is up-to-date with the template:
 
 ```
 SUCCESS: Good work! Project's cruft is up to date and as clean as possible :).
@@ -121,7 +160,8 @@ Otherwise, it will indicate that the project's boilerplate code is not up-to-dat
 FAILURE: Project's cruft is out of date! Run `cruft update` to clean this mess up.
 ```
 
-For viewing the difference, run `cruft diff`. This shows the difference between the project's boilerplate code and the template's latest version.
+For viewing the difference, run `cruft diff`. This shows the difference between the project's boilerplate code and the 
+template's latest version.
 
 After running `cruft update`, the project's boilerplate code will be updated to the latest version of the template.
 
