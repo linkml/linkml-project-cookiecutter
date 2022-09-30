@@ -80,17 +80,20 @@ site: gen-project gendoc
 deploy: all mkd-gh-deploy
 
 compile-sheets:
-{% if cookiecutter.use_schemasheets == "Yes"  %}
 	$(RUN) sheets2linkml --gsheet-id $(SHEET_ID) $(SHEET_TABS) > $(SHEET_MODULE_PATH).tmp && mv $(SHEET_MODULE_PATH).tmp $(SHEET_MODULE_PATH)
-{% endif %}
 
 # In future this will be done by conversion
 gen-examples:
 	cp src/data/examples/* $(EXAMPLEDIR)
 
 # generates all project files
+{% if cookiecutter.use_schemasheets == "Yes"  %}
 gen-project: $(PYMODEL) compile-sheets
 	$(RUN) gen-project -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+{% else %}
+gen-project: $(PYMODEL)
+	$(RUN) gen-project -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+{% endif %}
 
 test: test-schema test-python
 test-schema:
