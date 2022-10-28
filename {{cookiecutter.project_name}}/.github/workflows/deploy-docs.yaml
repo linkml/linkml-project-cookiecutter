@@ -1,4 +1,4 @@
-name: Auto-deployment of Documentation
+name: Auto-deployment of {{cookiecutter.__project_slug}} Documentation
 on:
   push:
     branches: [ main ]
