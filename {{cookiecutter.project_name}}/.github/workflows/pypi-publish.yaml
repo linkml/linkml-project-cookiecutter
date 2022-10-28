@@ -18,7 +18,7 @@ jobs:
         python-version: 3.9
 
     - name: Install Poetry
-      run: pip install poetry pip install poetry poetry-dynamic-versioning
+      run: pip install poetry poetry-dynamic-versioning
       # uses: snok/install-poetry@v1.1.6
       # with:
       #   virtualenvs-create: true
