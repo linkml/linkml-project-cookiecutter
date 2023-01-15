@@ -94,7 +94,17 @@ See [linkml/linkml-project-cookiecutter](https://github.com/linkml/linkml-projec
 Change to the folder your generated project is in
 
 ```bash
-cd linkml-projects/my-awesome-schema  # using the folder example above
+cd my-awesome-schema  # using the folder example above
+```
+
+Connect project to Git
+```bash
+git init
+git remote add origin https://github.com/my-org/my-awesome-schema.git
+```
+
+Setup the LinkML project
+```bash
 make setup
 ```
 
