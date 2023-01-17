@@ -118,6 +118,7 @@ Actions that autogenerate this documentation on release of your schema repositor
 https://my-user-or-organization.github.io/my-awesome-schema/ 
 
 ```bash
+pip install mkdocs-material mkdocs-mermaid2-plugin
 make serve
 ```
 
