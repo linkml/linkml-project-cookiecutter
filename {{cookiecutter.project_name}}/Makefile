@@ -48,7 +48,9 @@ setup: install gen-project gen-examples gendoc git-init-add
 
 # install any dependencies required for building
 install:
+	git init     # issues/33
 	poetry install
+	rm -fr .git  # issues/33
 .PHONY: install
 
 # ---
