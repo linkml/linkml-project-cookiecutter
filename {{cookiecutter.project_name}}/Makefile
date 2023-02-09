@@ -8,8 +8,8 @@ SHELL := bash
 
 RUN = poetry run
 # get values from about.yaml file
-SCHEMA_NAME = $(shell sh ./utils/get-value.sh name)
-SOURCE_SCHEMA_PATH = $(shell sh ./utils/get-value.sh source_schema_path)
+SCHEMA_NAME = $(shell ${SHELL} ./utils/get-value.sh name)
+SOURCE_SCHEMA_PATH = $(shell ${SHELL} ./utils/get-value.sh source_schema_path)
 SOURCE_SCHEMA_DIR = $(dir $(SOURCE_SCHEMA_PATH))
 SRC = src
 DEST = project
@@ -17,8 +17,8 @@ PYMODEL = $(SRC)/$(SCHEMA_NAME)/datamodel
 DOCDIR = docs
 EXAMPLEDIR = examples
 SHEET_MODULE = {{cookiecutter.__google_sheet_module}}
-SHEET_ID = $(shell sh ./utils/get-value.sh google_sheet_id)
-SHEET_TABS = $(shell sh ./utils/get-value.sh google_sheet_tabs)
+SHEET_ID = $(shell ${SHELL} ./utils/get-value.sh google_sheet_id)
+SHEET_TABS = $(shell ${SHELL} ./utils/get-value.sh google_sheet_tabs)
 SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
 
 # basename of a YAML file in model/
@@ -111,7 +111,7 @@ check-config:
 	@(grep my-datamodel about.yaml > /dev/null && printf "\n**Project not configured**:\n\n  - Remember to edit 'about.yaml'\n\n" || exit 0)
 
 convert-examples-to-%:
-	$(patsubst %, $(RUN) linkml-convert  % -s $(SOURCE_SCHEMA_PATH) -C Person, $(shell find src/data/examples -name "*.yaml")) 
+	$(patsubst %, $(RUN) linkml-convert  % -s $(SOURCE_SCHEMA_PATH) -C Person, $(shell ${SHELL} find src/data/examples -name "*.yaml")) 
 
 examples/%.yaml: src/data/examples/%.yaml
 	$(RUN) linkml-convert -s $(SOURCE_SCHEMA_PATH) -C Person $< -o $@
