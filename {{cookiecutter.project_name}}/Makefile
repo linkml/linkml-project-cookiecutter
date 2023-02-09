@@ -161,5 +161,6 @@ git-status:
 clean:
 	rm -rf $(DEST)
 	rm -rf tmp
+	rm -fr .git/
 
 include project.Makefile
