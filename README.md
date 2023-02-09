@@ -35,6 +35,7 @@ This tool will help you keep your project up to date with the latest LinkML tool
 In your poetry virtual environment:
 
 ```bash
+poetry shell
 poetry add cruft
 ```
 
@@ -43,7 +44,6 @@ poetry add cruft
 In your poetry virtual environment:
 
 ```bash
-poetry shell
 cruft create https://github.com/linkml/linkml-project-cookiecutter
 ```
 
@@ -94,7 +94,7 @@ See [linkml/linkml-project-cookiecutter](https://github.com/linkml/linkml-projec
 Change to the folder your generated project is in
 
 ```bash
-cd linkml-projects/my-awesome-schema  # using the folder example above
+cd my-awesome-schema  # using the folder example above
 make setup
 ```
 
