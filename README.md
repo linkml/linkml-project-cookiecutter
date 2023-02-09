@@ -91,6 +91,13 @@ See [linkml/linkml-project-cookiecutter](https://github.com/linkml/linkml-projec
 
 ### Step 4: Setup the LinkML project
 
+Optionally set project generation environment variables, skip if unsure.
+
+```
+export LINKML_COOKIECUTTER_GEN_DOC_ARGS=--no-mergeimports   # custom arg
+export LINKML_COOKIECUTTER_GEN_PROJECT_ARGS=--mergeimports  # default arg
+```
+
 Change to the folder your generated project is in
 
 ```bash

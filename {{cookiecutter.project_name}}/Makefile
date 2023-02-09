@@ -21,6 +21,18 @@ SHEET_ID = $(shell sh ./utils/get-value.sh google_sheet_id)
 SHEET_TABS = $(shell sh ./utils/get-value.sh google_sheet_tabs)
 SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
 
+# environment variables
+GEN_PARGS =
+ifdef LINKML_COOKIECUTTER_GEN_PROJECT_ARGS
+GEN_PARGS = ${LINKML_COOKIECUTTER_GEN_PROJECT_ARGS}
+endif
+
+GEN_DARGS =
+ifdef LINKML_COOKIECUTTER_GEN_DOC_ARGS
+GEN_DARGS = ${LINKML_COOKIECUTTER_GEN_DOC_ARGS}
+endif
+
+
 # basename of a YAML file in model/
 .PHONY: all clean
 
@@ -91,27 +103,27 @@ gen-examples:
 # generates all project files
 {% if cookiecutter.use_schemasheets == "Yes"  %}
 gen-project: $(PYMODEL) compile-sheets
-	$(RUN) gen-project -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+	$(RUN) gen-project ${GEN_PARGS} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
 {% else %}
 gen-project: $(PYMODEL)
-	$(RUN) gen-project -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+	$(RUN) gen-project ${GEN_PARGS} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
 {% endif %}
 
 test: test-schema test-python
 test-schema:
-	$(RUN) gen-project -d tmp $(SOURCE_SCHEMA_PATH) 
+	$(RUN) gen-project ${GEN_PARGS} -d tmp $(SOURCE_SCHEMA_PATH)
 
 test-python:
 	$(RUN) python -m unittest discover
 
 lint:
-	$(RUN) linkml-lint $(SOURCE_SCHEMA_PATH) 
+	$(RUN) linkml-lint $(SOURCE_SCHEMA_PATH)
 
 check-config:
 	@(grep my-datamodel about.yaml > /dev/null && printf "\n**Project not configured**:\n\n  - Remember to edit 'about.yaml'\n\n" || exit 0)
 
 convert-examples-to-%:
-	$(patsubst %, $(RUN) linkml-convert  % -s $(SOURCE_SCHEMA_PATH) -C Person, $(shell find src/data/examples -name "*.yaml")) 
+	$(patsubst %, $(RUN) linkml-convert  % -s $(SOURCE_SCHEMA_PATH) -C Person, $(shell find src/data/examples -name "*.yaml"))
 
 examples/%.yaml: src/data/examples/%.yaml
 	$(RUN) linkml-convert -s $(SOURCE_SCHEMA_PATH) -C Person $< -o $@
@@ -133,7 +145,7 @@ $(DOCDIR):
 
 gendoc: $(DOCDIR)
 	cp $(SRC)/docs/*md $(DOCDIR) ; \
-	$(RUN) gen-doc -d $(DOCDIR) $(SOURCE_SCHEMA_PATH)
+	$(RUN) gen-doc ${GEN_DOC_ARGS} -d $(DOCDIR) $(SOURCE_SCHEMA_PATH)
 
 testdoc: gendoc serve
 
