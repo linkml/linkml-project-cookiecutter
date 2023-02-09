@@ -146,10 +146,10 @@ git-init-add: git-init git-add git-commit git-status
 git-init:
 	git init
 git-add: .cruft.json
-	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/{{cookiecutter.__project_slug}}/schema/*yaml src/*/datamodel/*py src/data src/docs tests
+	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/{{cookiecutter.__project_slug}}/schema/*yaml src/*/datamodel/*py src/data src/docs tests src/*/_version.py
 	git add $(patsubst %, project/%, $(PROJECT_FOLDERS))
 git-commit:
-	git commit -m 'Initial commit' -a
+	git commit -m 'chore: initial commit' -a
 git-status:
 	git status
 
@@ -161,5 +161,6 @@ git-status:
 clean:
 	rm -rf $(DEST)
 	rm -rf tmp
+	rm -fr docs/*
 
 include project.Makefile
