@@ -20,8 +20,7 @@ curl -sSL https://install.python-poetry.org | python3 -
 mkdir linkml-projects
 cd linkml-projects
 poetry init # creates a new poetry project with pyproject.toml.  Note this is not a new linkml project, it is just a virtual environment to install cruft.
-poetry add click==8.0.4
-poetry install # this creates your virtual environment.
+poetry add click==8.0.4  # this creates your virtual environment.
 ```
 
 Add `poetry-dynamic-versioning` as a plugin
@@ -35,6 +34,7 @@ This tool will help you keep your project up to date with the latest LinkML tool
 In your poetry virtual environment:
 
 ```bash
+poetry shell
 poetry add cruft
 ```
 
@@ -43,7 +43,6 @@ poetry add cruft
 In your poetry virtual environment:
 
 ```bash
-poetry shell
 cruft create https://github.com/linkml/linkml-project-cookiecutter
 ```
 
@@ -101,7 +100,7 @@ export LINKML_COOKIECUTTER_GEN_PROJECT_ARGS=--no-mergeimports  # example
 Change to the folder your generated project is in
 
 ```bash
-cd linkml-projects/my-awesome-schema  # using the folder example above
+cd my-awesome-schema  # using the folder example above
 make setup
 ```
 

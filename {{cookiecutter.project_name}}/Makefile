@@ -8,8 +8,8 @@ SHELL := bash
 
 RUN = poetry run
 # get values from about.yaml file
-SCHEMA_NAME = $(shell sh ./utils/get-value.sh name)
-SOURCE_SCHEMA_PATH = $(shell sh ./utils/get-value.sh source_schema_path)
+SCHEMA_NAME = $(shell ${SHELL} ./utils/get-value.sh name)
+SOURCE_SCHEMA_PATH = $(shell ${SHELL} ./utils/get-value.sh source_schema_path)
 SOURCE_SCHEMA_DIR = $(dir $(SOURCE_SCHEMA_PATH))
 SRC = src
 DEST = project
@@ -17,8 +17,8 @@ PYMODEL = $(SRC)/$(SCHEMA_NAME)/datamodel
 DOCDIR = docs
 EXAMPLEDIR = examples
 SHEET_MODULE = {{cookiecutter.__google_sheet_module}}
-SHEET_ID = $(shell sh ./utils/get-value.sh google_sheet_id)
-SHEET_TABS = $(shell sh ./utils/get-value.sh google_sheet_tabs)
+SHEET_ID = $(shell ${SHELL} ./utils/get-value.sh google_sheet_id)
+SHEET_TABS = $(shell ${SHELL} ./utils/get-value.sh google_sheet_tabs)
 SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
 
 # environment variables
@@ -62,7 +62,6 @@ setup: install gen-project gen-examples gendoc git-init-add
 install:
 	git init     # issues/33
 	poetry install
-	rm -fr .git  # issues/33
 .PHONY: install
 
 # ---
@@ -123,7 +122,7 @@ check-config:
 	@(grep my-datamodel about.yaml > /dev/null && printf "\n**Project not configured**:\n\n  - Remember to edit 'about.yaml'\n\n" || exit 0)
 
 convert-examples-to-%:
-	$(patsubst %, $(RUN) linkml-convert  % -s $(SOURCE_SCHEMA_PATH) -C Person, $(shell find src/data/examples -name "*.yaml"))
+	$(patsubst %, $(RUN) linkml-convert  % -s $(SOURCE_SCHEMA_PATH) -C Person, $(shell ${SHELL} find src/data/examples -name "*.yaml"))
 
 examples/%.yaml: src/data/examples/%.yaml
 	$(RUN) linkml-convert -s $(SOURCE_SCHEMA_PATH) -C Person $< -o $@
@@ -158,10 +157,10 @@ git-init-add: git-init git-add git-commit git-status
 git-init:
 	git init
 git-add: .cruft.json
-	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/{{cookiecutter.__project_slug}}/schema/*yaml src/*/datamodel/*py src/data src/docs tests
+	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/{{cookiecutter.__project_slug}}/schema/*yaml src/*/datamodel/*py src/data src/docs tests src/*/_version.py
 	git add $(patsubst %, project/%, $(PROJECT_FOLDERS))
 git-commit:
-	git commit -m 'Initial commit' -a
+	git commit -m 'chore: initial commit' -a
 git-status:
 	git status
 
@@ -173,5 +172,6 @@ git-status:
 clean:
 	rm -rf $(DEST)
 	rm -rf tmp
+	rm -fr docs/*
 
 include project.Makefile
