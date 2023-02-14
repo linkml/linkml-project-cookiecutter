@@ -20,7 +20,7 @@ curl -sSL https://install.python-poetry.org | python3 -
 mkdir linkml-projects
 cd linkml-projects
 poetry init # creates a new poetry project with pyproject.toml.  Note this is not a new linkml project, it is just a virtual environment to install cruft.
-poetry add click==8.0.4  # this creates your virtual environment.
+poetry add click==8.1.3  # this creates your virtual environment.
 ```
 
 Add `poetry-dynamic-versioning` as a plugin
