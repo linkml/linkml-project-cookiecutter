@@ -60,7 +60,7 @@ setup: install gen-project gen-examples gendoc git-init-add
 
 # install any dependencies required for building
 install:
-	git init     # issues/33
+	git init
 	poetry install
 .PHONY: install
 
@@ -160,7 +160,7 @@ git-add: .cruft.json
 	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/{{cookiecutter.__project_slug}}/schema/*yaml src/*/datamodel/*py src/data src/docs tests src/*/_version.py
 	git add $(patsubst %, project/%, $(PROJECT_FOLDERS))
 git-commit:
-	git commit -m 'chore: initial commit' -a
+	git commit -m 'chore: make setup was run' -a
 git-status:
 	git status
 
@@ -173,5 +173,6 @@ clean:
 	rm -rf $(DEST)
 	rm -rf tmp
 	rm -fr docs/*
+	rm -fr $(PYMODEL)/*
 
 include project.Makefile
