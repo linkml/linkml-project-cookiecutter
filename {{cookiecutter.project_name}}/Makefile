@@ -102,15 +102,15 @@ gen-examples:
 # generates all project files
 {% if cookiecutter.use_schemasheets == "Yes"  %}
 gen-project: $(PYMODEL) compile-sheets
-	$(RUN) gen-project ${GEN_PARGS} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+	$(RUN) gen-project -d $(DEST) $(SOURCE_SCHEMA_PATH) ${GEN_PARGS} && mv $(DEST)/*.py $(PYMODEL)
 {% else %}
 gen-project: $(PYMODEL)
-	$(RUN) gen-project ${GEN_PARGS} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+	$(RUN) gen-project -d $(DEST) $(SOURCE_SCHEMA_PATH) ${GEN_PARGS} && mv $(DEST)/*.py $(PYMODEL)
 {% endif %}
 
 test: test-schema test-python
 test-schema:
-	$(RUN) gen-project ${GEN_PARGS} -d tmp $(SOURCE_SCHEMA_PATH)
+	$(RUN) gen-project -d tmp $(SOURCE_SCHEMA_PATH) ${GEN_PARGS}
 
 test-python:
 	$(RUN) python -m unittest discover
@@ -144,7 +144,7 @@ $(DOCDIR):
 
 gendoc: $(DOCDIR)
 	cp $(SRC)/docs/*md $(DOCDIR) ; \
-	$(RUN) gen-doc ${GEN_DARGS} -d $(DOCDIR) $(SOURCE_SCHEMA_PATH)
+	$(RUN) gen-doc -d $(DOCDIR) $(SOURCE_SCHEMA_PATH) ${GEN_DARGS}
 
 testdoc: gendoc serve
 
