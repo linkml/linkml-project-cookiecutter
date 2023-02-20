@@ -90,11 +90,12 @@ See [linkml/linkml-project-cookiecutter](https://github.com/linkml/linkml-projec
 
 ### Step 4: Setup the LinkML project
 
-Optionally set project generation environment variables (see `gen-doc --help` and `gen-project --help`):
+Optionally set project generation environment variables for gen-project, gen-doc, gen-owl (see --help for supported OPTIONS). Supported environment variables are listed here:
 
 ```
 export LINKML_COOKIECUTTER_GEN_DOC_ARGS=--no-mergeimports      # example
 export LINKML_COOKIECUTTER_GEN_PROJECT_ARGS=--no-mergeimports  # example
+export LINKML_COOKIECUTTER_GEN_OWL_ARGS='--no-type-objects --no-metaclasses'  # example
 ```
 
 Change to the folder your generated project is in

@@ -32,6 +32,11 @@ ifdef LINKML_COOKIECUTTER_GEN_DOC_ARGS
 GEN_DARGS = ${LINKML_COOKIECUTTER_GEN_DOC_ARGS}
 endif
 
+GEN_OARGS =
+ifdef LINKML_COOKIECUTTER_GEN_OWL_ARGS
+GEN_OARGS = ${LINKML_COOKIECUTTER_GEN_OWL_ARGS}
+endif
+
 
 # basename of a YAML file in model/
 .PHONY: all clean
@@ -107,6 +112,14 @@ gen-project: $(PYMODEL) compile-sheets
 gen-project: $(PYMODEL)
 	$(RUN) gen-project ${GEN_PARGS} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
 {% endif %}
+
+# regenerate specific project file if custom args are defined
+
+## owl
+ifneq ($(strip ${GEN_OARGS}),)
+	$(RUN) gen-owl ${GEN_OARGS} -o $(DEST)/owl/{{cookiecutter.__project_slug}}.owl.ttl $(SOURCE_SCHEMA_PATH)
+endif
+
 
 test: test-schema test-python
 test-schema:
