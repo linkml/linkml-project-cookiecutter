@@ -341,5 +341,3 @@ linkml:ClassDefinition a owl:Class ;
 
 linkml:SlotDefinition a owl:Class ;
     rdfs:label "slot_definition" .
-
-

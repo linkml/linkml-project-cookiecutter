@@ -122,5 +122,3 @@ linkml:Nodeidentifier NONLITERAL
        )
     } OR @<https://w3id.org/my_org/my_datamodelFamilialRelationship>
 )
-
-

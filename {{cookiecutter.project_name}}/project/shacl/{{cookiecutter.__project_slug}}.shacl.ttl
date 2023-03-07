@@ -162,4 +162,3 @@ my_datamodel:FamilialRelationship a sh:NodeShape ;
             sh:order 2 ;
             sh:path my_datamodel:related_to ] ;
     sh:targetClass my_datamodel:FamilialRelationship .
-
