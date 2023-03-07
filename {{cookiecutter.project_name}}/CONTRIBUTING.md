@@ -2,20 +2,21 @@
 
 :+1: First of all: Thank you for taking the time to contribute!
 
-The following is a set of guidelines for contributing to {{ cookiecutter.project_name }}. 
-These guidelines are not strict rules. Use your best judgment, and feel free to propose 
-changes to this document in a pull request.
+The following is a set of guidelines for contributing to
+{{ cookiecutter.project_name }}. These guidelines are not strict rules.
+Use your best judgment, and feel free to propose changes to this document
+in a pull request.
 
 ## Table Of Contents
 
-- [Code of Conduct](#code-of-conduct)
-- [Guidelines for Contributions and Requests](#contributions)
-    * [Reporting problems with the ontology](#reporting-bugs)
-    * [Requesting new terms](#requesting-terms)
-    * [Adding new terms by yourself](#adding-terms)
-- [Best practices](#best-practices)
-    * [How to write a great issue?](#great-issues)
-    * [How to create a great pull/merge request?](#great-pulls)
+* [Code of Conduct](#code-of-conduct)
+* [Guidelines for Contributions and Requests](#contributions)
+  * [Reporting problems with the ontology](#reporting-bugs)
+  * [Requesting new terms](#requesting-terms)
+  * [Adding new terms by yourself](#adding-terms)
+* [Best practices](#best-practices)
+  * [How to write a great issue?](#great-issues)
+  * [How to create a great pull/merge request?](#great-pulls)
 
 <a id="code-of-conduct"></a>
 
@@ -33,5 +34,6 @@ Please carefully read our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ### Reporting problems with the data model
 
-Please use our [Issue Tracker](https://github.com/{{ cookiecutter.github_org }}/{{ cookiecutter.project_name }}/issues/) for reporting problems with the ontology. 
-
+Please use our
+[Issue Tracker](https://github.com/{{ cookiecutter.github_org }}/{{ cookiecutter.project_name }}/issues/)
+for reporting problems with the ontology.
