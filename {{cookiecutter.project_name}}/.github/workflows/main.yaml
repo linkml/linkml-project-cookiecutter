@@ -1,7 +1,7 @@
 # Built from:
 # https://docs.github.com/en/actions/guides/building-and-testing-python
 # https://github.com/snok/install-poetry#workflows-and-tips
-
+---
 name: Build and test {{cookiecutter.__project_slug}}
 
 on: [pull_request]
@@ -34,20 +34,19 @@ jobs:
         uses: snok/install-poetry@v1.3
 
       #----------------------------------------------
-      # install dependencies if cache does not exist 
+      # install dependencies if cache does not exist
       #----------------------------------------------
       - name: Install dependencies
         run: poetry install --no-interaction --no-root
 
       #----------------------------------------------
-      #    install your root project, if required 
-      #----------------------------------------------      
+      #    install your root project, if required
+      #----------------------------------------------
       - name: Install library
         run: poetry install --no-interaction
 
       #----------------------------------------------
-      #              run test suite   
+      #              run test suite
       #----------------------------------------------
       - name: Run tests
         run: make test
-

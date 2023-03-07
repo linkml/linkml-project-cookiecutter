@@ -1,3 +1,4 @@
+---
 id: https://w3id.org/{{cookiecutter.github_org}}/{{cookiecutter.project_name}}
 name: {{cookiecutter.project_name}}
 title: {{cookiecutter.project_name}}

@@ -1,3 +1,4 @@
+---
 name: {{cookiecutter.__project_slug}}
 author: {{cookiecutter.__author}}
 description: {{cookiecutter.project_description}}
