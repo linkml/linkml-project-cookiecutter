@@ -20,9 +20,9 @@ default_range: string
 
 imports:
   - linkml:types
-{% if cookiecutter.use_schemasheets == "Yes" %}
+{%- if cookiecutter.use_schemasheets == "Yes" %}
   - {{cookiecutter.__google_sheet_module}}
-{% else %}
+{%- else %}
 
 classes:
 
@@ -47,7 +47,7 @@ classes:
     slot_usage:
       primary_email:
         pattern: "^\\S+@[\\S+\\.]+\\S+"
-        
+
   {{cookiecutter.main_schema_class}}Collection:
     tree_root: true
     description: >-
@@ -83,7 +83,7 @@ slots:
   vital_status:
     range: PersonStatus
     description: living or dead status
-    
+
 enums:
   PersonStatus:
     permissible_values:
