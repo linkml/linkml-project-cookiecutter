@@ -89,7 +89,7 @@ enums:
     permissible_values:
       ALIVE:
         description: the person is living
-        meaning: PATO:0001421 
+        meaning: PATO:0001421
       DEAD:
         description: the person is deceased
         meaning: PATO:0001422
@@ -97,4 +97,4 @@ enums:
         description: the vital status is not known
         todos:
           - map this to an ontology
-{% endif %}
+{%- endif %}
