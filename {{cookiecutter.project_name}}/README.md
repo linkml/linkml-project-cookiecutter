@@ -14,11 +14,11 @@
   * [{{cookiecutter.__project_slug}}](src/{{cookiecutter.__project_slug}})
     * [schema](src/{{cookiecutter.__project_slug}}/schema) -- LinkML schema
       (edit this)
-{% if cookiecutter.create_python_classes == "Yes" %}
+{%- if cookiecutter.create_python_classes == "Yes" %}
     * [datamodel](src/{{cookiecutter.__project_slug}}/datamodel) -- generated
       Python datamodel
 * [tests/](tests/) - Python tests
-{% endif %}
+{%- endif %}
 
 ## Developer Documentation
 
