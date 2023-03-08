@@ -153,17 +153,17 @@ make serve
 
 ### Step 8: Create a github project
 
-8a: Go to [https://github.com/new] and follow the instructions, being sure to NOT
-add a README or .gitignore file (this cookiecutter template will take care of
-this for you)
+1. Go to [https://github.com/new] and follow the instructions, being sure to
+   NOT add a README or .gitignore file (this cookiecutter template will take
+   care of this for you)
 
-8b: Add the remote to your local git repository`
+2. Add the remote to your local git repository
 
-```bash
-git remote add origin https://github.com/my-user-or-organization/my-awesome-schema.git
-git branch -M main
-git push -u origin main
-```
+   ```bash
+   git remote add origin https://github.com/my-user-or-organization/my-awesome-schema.git
+   git branch -M main
+   git push -u origin main
+   ```
 
 ### Step 9: Deploy documentation
 
