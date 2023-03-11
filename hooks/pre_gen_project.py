@@ -2,7 +2,6 @@
 
 import re
 import sys
-from pathlib import Path
 
 MODULE_REGEX = re.compile(r'^[_a-zA-Z][_a-zA-Z0-9\-]+$')
 project_name = '{{ cookiecutter.project_name }}'

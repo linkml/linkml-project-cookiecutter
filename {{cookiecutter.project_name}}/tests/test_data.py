@@ -11,6 +11,7 @@ DATA_DIR = os.path.join(ROOT, "src", "data", "examples")
 
 EXAMPLE_FILES = glob.glob(os.path.join(DATA_DIR, '*.yaml'))
 
+
 class TestData(unittest.TestCase):
     """Test data and datamodel."""
 

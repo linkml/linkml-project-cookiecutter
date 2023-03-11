@@ -1,9 +1,6 @@
 """Code to run after generating the project."""
 
-import re
-import sys
 import shutil
-from pathlib import Path
 
 shutil.rmtree("licenses")
 

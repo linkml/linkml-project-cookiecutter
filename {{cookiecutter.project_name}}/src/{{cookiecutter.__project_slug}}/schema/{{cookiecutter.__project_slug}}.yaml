@@ -1,3 +1,4 @@
+---
 id: https://w3id.org/{{cookiecutter.github_org}}/{{cookiecutter.project_name}}
 name: {{cookiecutter.project_name}}
 title: {{cookiecutter.project_name}}
@@ -46,7 +47,7 @@ classes:
     slot_usage:
       primary_email:
         pattern: "^\\S+@[\\S+\\.]+\\S+"
-        
+
   {{cookiecutter.main_schema_class}}Collection:
     tree_root: true
     description: >-
@@ -82,13 +83,13 @@ slots:
   vital_status:
     range: PersonStatus
     description: living or dead status
-    
+
 enums:
   PersonStatus:
     permissible_values:
       ALIVE:
         description: the person is living
-        meaning: PATO:0001421 
+        meaning: PATO:0001421
       DEAD:
         description: the person is deceased
         meaning: PATO:0001422

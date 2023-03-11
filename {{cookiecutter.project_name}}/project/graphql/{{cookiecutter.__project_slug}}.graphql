@@ -65,4 +65,3 @@ type Relationship
     relatedTo: String
     type: String
   }
-
