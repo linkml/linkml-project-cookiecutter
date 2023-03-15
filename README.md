@@ -109,12 +109,14 @@ For more docs, see
 
 ### Step 4: Setup the LinkML project
 
-Optionally set project generation environment variables
-(see `gen-doc --help` and `gen-project --help`):
+Project generation uses linkml tool defaults. Optionally you can influence the process by passing arguments as environment varibles inside `custom.env` file, which is read y Makefile and GitHub Actions.
 
 ```bash
-export LINKML_COOKIECUTTER_GEN_DOC_ARGS=--no-mergeimports      # example
-export LINKML_COOKIECUTTER_GEN_PROJECT_ARGS=--no-mergeimports  # example
+LINKML_GENERATORS_PROJECT_ARGS=--no-mergeimports     # see `gen-project --help`
+LINKML_GENERATORS_DOC_ARGS=--no-mergeimports         # see `gen-doc --help`
+LINKML_GENERATORS_OWL_ARGS=--no-mergeimports         # see 'gen-owl --help`
+LINKML_GENERATORS_JAVA_ARGS=--no-mergeimports        # see 'gen-java --help`
+LINKML_GENERATORS_TYPESCRIPT_ARGS=--no-mergeimports  # see 'gen-typescript --help`
 ```
 
 Change to the folder your generated project is in
