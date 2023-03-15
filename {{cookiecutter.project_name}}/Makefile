@@ -5,6 +5,7 @@ SHELL := bash
 .DELETE_ON_ERROR:
 .SUFFIXES:
 .SECONDARY:
+.EXPORT_ALL_VARIABLES:
 
 RUN = poetry run
 # get values from about.yaml file
@@ -21,17 +22,37 @@ SHEET_ID = $(shell ${SHELL} ./utils/get-value.sh google_sheet_id)
 SHEET_TABS = $(shell ${SHELL} ./utils/get-value.sh google_sheet_tabs)
 SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
 
-# environment variables
-GEN_PARGS =
-ifdef LINKML_COOKIECUTTER_GEN_PROJECT_ARGS
-GEN_PARGS = ${LINKML_COOKIECUTTER_GEN_PROJECT_ARGS}
+# import environment variables
+ifdef LINKML_ENV_FILE
+include ${LINKML_ENV_FILE}
+else
+include custom.env
 endif
 
-GEN_DARGS =
-ifdef LINKML_COOKIECUTTER_GEN_DOC_ARGS
-GEN_DARGS = ${LINKML_COOKIECUTTER_GEN_DOC_ARGS}
+GEN_PARGS=
+ifdef LINKML_GENERATORS_PROJECT_ARGS
+GEN_PARGS = ${LINKML_GENERATORS_PROJECT_ARGS}
 endif
 
+GEN_DARGS=
+ifdef LINKML_GENERATORS_DOC_ARGS
+GEN_DARGS = ${LINKML_GENERATORS_DOC_ARGS}
+endif
+
+GEN_OARGS=
+ifdef LINKML_GENERATORS_OWL_ARGS
+GEN_OARGS = ${LINKML_GENERATORS_OWL_ARGS}
+endif
+
+GEN_JARGS=
+ifdef LINKML_GENERATORS_JAVA_ARGS
+GEN_JARGS = ${LINKML_GENERATORS_JAVA_ARGS}
+endif
+
+GEN_TARGS=
+ifdef LINKML_GENERATORS_TYPESCRIPT_ARGS
+GEN_TARGS = ${LINKML_GENERATORS_TYPESCRIPT_ARGS}
+endif
 
 # basename of a YAML file in model/
 .PHONY: all clean
@@ -60,7 +81,7 @@ setup: install gen-project gen-examples gendoc git-init-add
 
 # install any dependencies required for building
 install:
-	git init     # issues/33
+	git init
 	poetry install
 .PHONY: install
 
@@ -107,6 +128,19 @@ gen-project: $(PYMODEL) compile-sheets
 gen-project: $(PYMODEL)
 	$(RUN) gen-project ${GEN_PARGS} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
 {% endif %}
+
+# non-standard generations controlled by environment variables
+ifneq ($(strip ${GEN_OARGS}),)
+        $(RUN) gen-owl ${GEN_OARGS} -o $(DEST)/owl/{{cookiecutter.__project_slug}}.owl.ttl $(SOURCE_SCHEMA_PATH)
+endif
+ifneq ($(strip ${GEN_JARGS}),)
+        mkdir project/java || true
+        $(RUN) gen-java ${GEN_JARGS} --output-directory $(DEST)/java/ $(SOURCE_SCHEMA_PATH)
+endif
+ifneq ($(strip ${GEN_TARGS}),)
+        mkdir project/typescript || true
+        $(RUN) gen-typescript ${GEN_TARGS} $(SOURCE_SCHEMA_PATH) >${DEST}/typescript/{{cookiecutter.__project_slug}}.ts
+endif
 
 test: test-schema test-python test-examples
 
@@ -165,15 +199,15 @@ MKDOCS = $(RUN) mkdocs
 mkd-%:
 	$(MKDOCS) $*
 
-PROJECT_FOLDERS = sqlschema shex shacl protobuf prefixmap owl jsonschema jsonld graphql excel
+PROJECT_FOLDERS = sqlschema shex shacl protobuf prefixmap owl jsonschema jsonld graphql excel java typescript
 git-init-add: git-init git-add git-commit git-status
 git-init:
 	git init
 git-add: .cruft.json
-	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/{{cookiecutter.__project_slug}}/schema/*yaml src/*/datamodel/*py src/data src/docs tests src/*/_version.py
-	git add $(patsubst %, project/%, $(PROJECT_FOLDERS))
+	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/{{cookiecutter.__project_slug}}/schema/*yaml src/*/datamodel/*py src/data src/docs tests src/*/_version.py project custom.env
+	git add $(patsubst %, project/%, $(PROJECT_FOLDERS)) || true
 git-commit:
-	git commit -m 'chore: initial commit' -a
+	git commit -m 'chore: make setup was run' -a
 git-status:
 	git status
 
@@ -186,5 +220,6 @@ clean:
 	rm -rf $(DEST)
 	rm -rf tmp
 	rm -fr docs/*
+	rm -fr $(PYMODEL)/*
 
 include project.Makefile

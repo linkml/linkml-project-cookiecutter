@@ -109,7 +109,7 @@ For more docs, see
 
 ### Step 4: Setup the LinkML project
 
-Project generation uses linkml tool defaults. Optionally you can influence the process by passing arguments as environment varibles inside `custom.env` file, which is read y Makefile and GitHub Actions.
+Project generation uses linkml tool defaults. Optionally you can influence new defaults by passing arguments as environment variables inside `custom.env` file, which is respected by Makefile and GitHub Actions.
 
 ```bash
 LINKML_GENERATORS_PROJECT_ARGS=--no-mergeimports     # see `gen-project --help`

@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+env:
+  ENV_FILE: custom.env
+
 jobs:
   build-docs:
     runs-on: ubuntu-latest
@@ -24,9 +27,18 @@ jobs:
       - name: Install dependencies.
         run: poetry install -E docs
 
+      - name: Import environment variables from file
+        id: import-env
+        shell: bash
+        run: |
+          touch ${ENV_FILE}  # incase missing
+          while read line; do
+            echo "$line" >> $GITHUB_ENV
+          done < ${ENV_FILE}
+
       - name: Build documentation.
         run: |
           mkdir -p docs
           touch docs/.nojekyll
-          poetry run gen-doc -d docs src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__project_slug}}.yaml
+          poetry run gen-doc ${LINKML_GENERATORS_DOC_ARGS} -d docs src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__project_slug}}.yaml
           poetry run mkdocs gh-deploy
