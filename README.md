@@ -1,7 +1,14 @@
-# LinkML Project Cookiecutter
+# Examples- First LinkML Project Cookiecutter
 
 A [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) template for
 projects using [LinkML](https://github.com/linkml/linkml).
+
+see also https://github.com/linkml/linkml-project-cookiecutter
+
+Local changes:
+- emphasis on examples
+- emphasis on Collections
+- todo: emphasis on DataHarmonizer
 
 ## Standard Protocol
 
