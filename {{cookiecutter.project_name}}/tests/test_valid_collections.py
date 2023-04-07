@@ -26,4 +26,5 @@ class TestData(unittest.TestCase):
                 obj = yaml_loader.load(path, target_class={{cookiecutter.main_schema_class}}Collection)
                 assert obj
             else:
+                print()
                 print(f"{path} does not match {ACCEPTABLE_PREFIX} so will not be tested")
