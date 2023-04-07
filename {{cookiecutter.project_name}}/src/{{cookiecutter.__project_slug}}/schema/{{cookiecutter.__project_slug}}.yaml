@@ -88,16 +88,22 @@ slots:
     description: living or dead status
 
 enums:
+  notes:
+    - redundant text properties are currently required for building a DataHarmonizer menu
   PersonStatus:
     permissible_values:
       ALIVE:
+        text: ALIVE
         description: the person is living
         meaning: PATO:0001421
       DEAD:
+        text: DEAD
         description: the person is deceased
         meaning: PATO:0001422
       UNKNOWN:
+        text: UNKNOWN
         description: the vital status is not known
         todos:
           - map this to an ontology
+
 {%- endif %}
