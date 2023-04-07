@@ -29,3 +29,7 @@ build-backend = "poetry_dynamic_versioning.backend"
 
 [tool.poetry.extras]
 docs = ["linkml", "mkdocs-material"]
+
+[tool.poetry.scripts]
+dh-json2linkml = 'src.{{cookiecutter.__project_slug}}.datamodel.dh_json2linkml:update_json'
+linkml-json2dh = 'src.{{cookiecutter.__project_slug}}.datamodel.linkml_json2dh:extract_lists'
