@@ -88,9 +88,9 @@ slots:
     description: living or dead status
 
 enums:
-  notes:
-    - redundant text properties are currently required for building a DataHarmonizer menu
   PersonStatus:
+    notes:
+      - redundant text properties are currently required for building a DataHarmonizer menu
     permissible_values:
       ALIVE:
         text: ALIVE
