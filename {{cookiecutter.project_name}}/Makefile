@@ -99,7 +99,7 @@ compile-sheets:
 # MAM 2023-05-07 added yaml extension because dir now contains valid and invalid subdirs
 #   todo: wouldn't include any examples in other serializations like TTL, JSON etc.
 gen-examples:
-	cp src/data/examples/yaml* $(EXAMPLEDIR)
+	cp src/data/examples/*yaml $(EXAMPLEDIR)
 
 # generates all project files
 {% if cookiecutter.use_schemasheets == "Yes"  %}
