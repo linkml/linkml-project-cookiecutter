@@ -134,7 +134,12 @@ examples/%.json: src/data/examples/%.yaml
 examples/%.ttl: src/data/examples/%.yaml
 	$(RUN) linkml-convert -P EXAMPLE=http://example.org/ -s $(SOURCE_SCHEMA_PATH) -C Person $< -o $@
 
-test-examples: examples/output
+.PHONY: delete-examples-outputs
+
+delete-examples-outputs:
+	rm -rf $(EXAMPLEDIR)/output
+
+test-examples: delete-examples-outputs examples/output
 
 examples/output: src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__project_slug}}.yaml
 	mkdir -p $@
