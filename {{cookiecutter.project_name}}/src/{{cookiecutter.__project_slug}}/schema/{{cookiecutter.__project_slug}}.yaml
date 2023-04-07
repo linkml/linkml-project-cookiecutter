@@ -36,17 +36,17 @@ classes:
     class_uri: schema:Thing
 
   {{cookiecutter.main_schema_class}}:
-  is_a: NamedThing
-  description: >-
-    Represents a {{cookiecutter.main_schema_class}}
-  slots:
-    - primary_email
-    - birth_date
-    - age_in_years
-    - vital_status
-  slot_usage:
-    primary_email:
-      pattern: "^\\S+@[\\S+\\.]+\\S+"
+    is_a: NamedThing
+    description: >-
+      Represents a {{cookiecutter.main_schema_class}}
+    slots:
+      - primary_email
+      - birth_date
+      - age_in_years
+      - vital_status
+    slot_usage:
+      primary_email:
+        pattern: "^\\S+@[\\S+\\.]+\\S+"
 
   {{cookiecutter.main_schema_class}}Collection:
     tree_root: true
