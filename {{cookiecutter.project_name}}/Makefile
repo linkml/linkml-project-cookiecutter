@@ -96,8 +96,10 @@ compile-sheets:
 	$(RUN) sheets2linkml --gsheet-id $(SHEET_ID) $(SHEET_TABS) > $(SHEET_MODULE_PATH).tmp && mv $(SHEET_MODULE_PATH).tmp $(SHEET_MODULE_PATH)
 
 # In future this will be done by conversion
+# MAM 2023-05-07 added yaml extension because dir now contains valid and invalid subdirs
+#   todo: wouldn't include any examples in other serializations like TTL, JSON etc.
 gen-examples:
-	cp src/data/examples/* $(EXAMPLEDIR)
+	cp src/data/examples/yaml* $(EXAMPLEDIR)
 
 # generates all project files
 {% if cookiecutter.use_schemasheets == "Yes"  %}
