@@ -49,15 +49,15 @@ classes:
       pattern: "^\\S+@[\\S+\\.]+\\S+"
 
   {{cookiecutter.main_schema_class}}Collection:
-  tree_root: true
-  description: >-
-    A holder for {{cookiecutter.main_schema_class}} objects
-  attributes:
-    entries:
-      range: {{cookiecutter.main_schema_class}}
-      multivalued: true
-      inlined: true
-      inlined_as_list: true
+    tree_root: true
+    description: >-
+      A holder for {{cookiecutter.main_schema_class}} objects
+    attributes:
+      entries:
+        range: {{cookiecutter.main_schema_class}}
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
 
 slots:
   id:
