@@ -146,6 +146,7 @@ examples/output: src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__pro
 	mkdir -p $@
 	$(RUN) linkml-run-examples \
 		--output-formats json \
+		--output-formats ttl \
 		--output-formats yaml \
 		--counter-example-input-directory src/data/examples/invalid \
 		--input-directory src/data/examples/valid \
