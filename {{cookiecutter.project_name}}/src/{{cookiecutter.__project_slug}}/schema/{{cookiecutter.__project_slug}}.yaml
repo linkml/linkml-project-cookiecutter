@@ -9,20 +9,20 @@ see_also:
   - https://{{cookiecutter.github_org}}.github.io/{{cookiecutter.project_name}}
 
 prefixes:
-  {{cookiecutter.__project_slug}}: https://w3id.org/{{cookiecutter.github_org}}/{{cookiecutter.project_name}}/
-  linkml: https://w3id.org/linkml/
-  biolink: https://w3id.org/biolink/
-  schema: http://schema.org/
-  PATO: http://purl.obolibrary.org/obo/PATO_
-  example: https://example.org/
+    {{cookiecutter.__project_slug}}: https://w3id.org/{{cookiecutter.github_org}}/{{cookiecutter.project_name}}/
+      linkml: https://w3id.org/linkml/
+      biolink: https://w3id.org/biolink/
+      schema: http://schema.org/
+      PATO: http://purl.obolibrary.org/obo/PATO_
+      example: https://example.org/
 default_prefix: {{cookiecutter.__project_slug}}
 default_range: string
 
 imports:
   - linkml:types
-{%- if cookiecutter.use_schemasheets == "Yes" %}
-  - {{cookiecutter.__google_sheet_module}}
-{%- else %}
+  { %- if cookiecutter.use_schemasheets == "Yes" % }
+- {{cookiecutter.__google_sheet_module}}
+  { %- else % }
 
 classes:
 
@@ -36,27 +36,28 @@ classes:
     class_uri: schema:Thing
 
   {{cookiecutter.main_schema_class}}:
-    is_a: NamedThing
-    description: >-
-      Represents a {{cookiecutter.main_schema_class}}
-    slots:
-      - primary_email
-      - birth_date
-      - age_in_years
-      - vital_status
-    slot_usage:
-      primary_email:
-        pattern: "^\\S+@[\\S+\\.]+\\S+"
+  is_a: NamedThing
+  description: >-
+    Represents a {{cookiecutter.main_schema_class}}
+  slots:
+    - primary_email
+    - birth_date
+    - age_in_years
+    - vital_status
+  slot_usage:
+    primary_email:
+      pattern: "^\\S+@[\\S+\\.]+\\S+"
 
   {{cookiecutter.main_schema_class}}Collection:
-    tree_root: true
-    description: >-
-      A holder for {{cookiecutter.main_schema_class}} objects
-    attributes:
-      entries:
-        range: {{cookiecutter.main_schema_class}}
-        multivalued: true
-        inlined: true
+  tree_root: true
+  description: >-
+    A holder for {{cookiecutter.main_schema_class}} objects
+  attributes:
+    entries:
+      range: {{cookiecutter.main_schema_class}}
+      multivalued: true
+      inlined: true
+      inlined_as_list: true
 
 slots:
   id:
@@ -97,4 +98,4 @@ enums:
         description: the vital status is not known
         todos:
           - map this to an ontology
-{%- endif %}
+  { %- endif % }
