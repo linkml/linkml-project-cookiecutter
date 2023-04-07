@@ -1,0 +1,29 @@
+[
+  {
+    "primary_email": "xxx@xxx.xxx",
+    "birth_date": "2013-03-16T04:00:00.000Z",
+    "age_in_years": 12,
+    "vital_status": "ALIVE",
+    "id": "example:1",
+    "name": "Sam",
+    "description": "friend"
+  },
+  {
+    "primary_email": "xxx@xxx.xxx",
+    "birth_date": "2013-03-16T04:00:00.000Z",
+    "age_in_years": 12,
+    "vital_status": "DEAD",
+    "id": "example:2",
+    "name": "Sam",
+    "description": "friend"
+  },
+  {
+    "primary_email": "xxx@xxx.xxx",
+    "birth_date": "2013-03-16T04:00:00.000Z",
+    "age_in_years": 12,
+    "vital_status": "UNKNOWN",
+    "id": "example:3",
+    "name": "Sam",
+    "description": "friend"
+  }
+]
