@@ -5,7 +5,7 @@ RUN = poetry run
 .PHONY: check-jsonschema-example
 
 check-jsonschema-example:
-	# showing ignore failures more
+	# showing ignore failures here
 	# this should be templated
 	- poetry run check-jsonschema \
 	  --schemafile project/jsonschema/my_awesome_schema.schema.json \
