@@ -1,0 +1,6 @@
+entries:
+  - id: example:{{cookiecutter.main_schema_class}}001
+    name: foo bar
+  - id: example:{{cookiecutter.main_schema_class}}002
+    name: foo bar
+
