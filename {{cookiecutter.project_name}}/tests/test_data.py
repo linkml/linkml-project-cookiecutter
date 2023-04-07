@@ -11,7 +11,9 @@ DATA_DIR = os.path.join(ROOT, "src", "data", "examples", "valid")
 
 EXAMPLE_FILES = glob.glob(os.path.join(DATA_DIR, '*.yaml'))
 
-ACCEPTABLE_PREFIX = f"{DATA_DIR}/{{{cookiecutter.main_schema_class}}Collection.class_name}"
+MAIN_SCHEMA_CLASS_NAME = {{cookiecutter.main_schema_class}}Collection.class_name
+
+ACCEPTABLE_PREFIX = DATA_DIR + "/" + MAIN_SCHEMA_CLASS_NAME
 
 
 class TestData(unittest.TestCase):
@@ -24,4 +26,4 @@ class TestData(unittest.TestCase):
                 obj = yaml_loader.load(path, target_class={{cookiecutter.main_schema_class}}Collection)
                 assert obj
             else:
-                print(f"{path} does not match {acceptable_prefix} so will not be tested")
+                print(f"{path} does not match {ACCEPTABLE_PREFIX} so will not be tested")
