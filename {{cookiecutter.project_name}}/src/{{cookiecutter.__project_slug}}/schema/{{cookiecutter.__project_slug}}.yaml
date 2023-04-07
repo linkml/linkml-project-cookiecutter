@@ -61,10 +61,12 @@ classes:
 
 slots:
   id:
-    identifier: true
-    slot_uri: schema:identifier
-    range: uriorcurie
     description: A unique identifier for a thing
+    identifier: true
+    pattern: "[a-zA-Z0-9_]+:[a-zA-Z0-9_]+"
+    range: uriorcurie
+    required: true
+    slot_uri: schema:identifier
   name:
     slot_uri: schema:name
     description: A human-readable name for a thing
