@@ -4,10 +4,6 @@ RUN = poetry run
 
 .PHONY: check-jsonschema-example run-linkml-validation
 
-# {{cookiecutter.__source_path}}
-
-{{cookiecutter.__project_slug}}.schema.json
-
 check-jsonschema-example: project/jsonschema/{{cookiecutter.__project_slug}}.schema.json \
 	  {{cookiecutter.__project_slug}}/src/data/examples/invalid/{{cookiecutter.main_schema_class}}Collection-undefined-slot.yaml
 	# showing ignore failures here
