@@ -1,5 +1,6 @@
 import json
 import click
+import yaml
 
 
 @click.command()
@@ -8,7 +9,9 @@ import click
 @click.option('--output-file', '-o', type=click.Path(), required=True,
               help='Path to the output JSON file')
 @click.option('--key', '-k', required=True, help='Name of the key to assign the list to')
-def update_json(input_file, output_file, key):
+@click.option('--output-format', '-f', type=click.Choice(['yaml', 'json'], case_sensitive=False),
+              help='Output format')
+def update_json(input_file, output_file, key, output_format):
     # Load the input JSON file
     with open(input_file, 'r') as f:
         data = json.load(f)
@@ -20,9 +23,14 @@ def update_json(input_file, output_file, key):
     # Create a new dictionary with the specified key and value
     updated_data = {key: data}
 
-    # Save the updated object as a new JSON file
-    with open(output_file, 'w') as f:
-        json.dump(updated_data, f, indent=2)
+    if output_format == 'yaml':
+        # Convert the dictionary to YAML
+        with open(output_file, 'w') as f:
+            yaml.dump(updated_data, f, sort_keys=False)
+    elif output_format == 'json':
+        # Save the updated object as a new JSON file
+        with open(output_file, 'w') as f:
+            json.dump(updated_data, f, indent=2)
 
     click.echo(f'Successfully updated JSON file with key "{key}"')
 
