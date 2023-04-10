@@ -1,17 +1,25 @@
 import json
 import os
 import click
+import yaml
 
 
 @click.command()
 @click.option('--input-file', '-i', type=click.Path(exists=True), required=True,
               help='Path to the input JSON file')
+@click.option('--input-format', '-f', type=click.Choice(['yaml', 'json'], case_sensitive=False),
+              default="yaml", help='Input format')
 @click.option('--output-dir', '-o', type=click.Path(), required=True,
               help='Path to the output directory')
-def extract_lists(input_file, output_dir):
-    # Load the input JSON file
-    with open(input_file, 'r') as f:
-        data = json.load(f)
+def extract_lists(input_file, input_format, output_dir):
+    if input_format == 'yaml':
+        # Convert the dictionary to YAML
+        with open(input_file, 'r') as f:
+            data = yaml.load(f)
+    elif input_format == 'json':
+        # Load the input JSON file
+        with open(input_file, 'r') as f:
+            data = json.load(f)
 
     # Make sure the input is a dictionary with one or more key-value pairs,
     # where the values are lists
