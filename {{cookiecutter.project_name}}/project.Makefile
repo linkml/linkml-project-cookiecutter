@@ -28,3 +28,9 @@ src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}_linkml.json: src/d
 #	$(RUN) linkml-json2dh \
 #		--input-file $< \
 #		--output-dir $(dir $@)
+
+project/reports/slot_usage_esp_validation.tsv:
+	linkml2sheets \
+		--schema {{cookiecutter.__source_path}} \
+		--output $@ \
+		src/local_schemasheets/templates/slot_usage_esp_validation.tsv
