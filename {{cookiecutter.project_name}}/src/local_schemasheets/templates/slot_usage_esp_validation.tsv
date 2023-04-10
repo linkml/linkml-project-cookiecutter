@@ -1,16 +1,16 @@
-metatype	class	slots	annotation placeholder	slot	title	abstract	alias	aliases	definition_uri	deprecated	designates_type	domain_of	examples	identifier	ifabsent	in_subset	inlined	inlined_as_list	is_a	is_grouping_slot	is_usage_slot	list_elements_unique	maximum_value	minimum_value	mixin	mixins	multivalued	pattern	range	readonly	recommended	required	slot_group	slot_uri	string_serialization	structured_pattern	subproperty_of
-> metatype	class	slots	annotations	slot	title	abstract	alias	aliases	definition_uri	deprecated	designates_type	domain_of	examples	identifier	ifabsent	in_subset	inlined	inlined_as_list	is_a	is_grouping_slot	is_usage_slot	list_elements_unique	maximum_value	minimum_value	mixin	mixins	multivalued	pattern	range	readonly	recommended	required	slot_group	slot_uri	string_serialization	structured_pattern	subproperty_of
->		"internal_separator: ""|"""	inner_key: undefined					"internal_separator: ""|"""				"internal_separator: ""|"""	"internal_separator: ""|"""													"internal_separator: ""|"""											
-				id										true														[a-zA-Z0-9_]+:[a-zA-Z0-9_]+	uriorcurie			true		schema:identifier			
-				name																														schema:name			
-				description																														schema:description			
-				primary_email																														schema:email			
-				birth_date																									date					schema:birthDate			
-				age_in_years																									integer								
-				vital_status																									PersonStatus								
-				entries													true	true									true		Person								
-	NamedThing	id|name|description																																			
-	Person	primary_email|birth_date|age_in_years|vital_status																	NamedThing																		
-	Person			primary_email																								^\S+@[\S+\.]+\S+									
-	PersonCollection																																				
-	PersonCollection			entries													true	true									true		Person								
+class	slots	annotation placeholder	slot	title	abstract	alias	aliases	definition_uri	deprecated	designates_type	domain_of	examples	identifier	ifabsent	in_subset	inlined	inlined_as_list	is_a	is_grouping_slot	is_usage_slot	list_elements_unique	maximum_value	minimum_value	mixin	mixins	multivalued	pattern	range	readonly	recommended	required	slot_group	slot_uri	string_serialization	structured_pattern	subproperty_of
+>class	slots	annotations	slot	title	abstract	alias	aliases	definition_uri	deprecated	designates_type	domain_of	examples	identifier	ifabsent	in_subset	inlined	inlined_as_list	is_a	is_grouping_slot	is_usage_slot	list_elements_unique	maximum_value	minimum_value	mixin	mixins	multivalued	pattern	range	readonly	recommended	required	slot_group	slot_uri	string_serialization	structured_pattern	subproperty_of
+>	"internal_separator: ""|"""	inner_key: undefined					"internal_separator: ""|"""				"internal_separator: ""|"""	"internal_separator: ""|"""													"internal_separator: ""|"""
+			id										true														[a-zA-Z0-9_]+:[a-zA-Z0-9_]+	uriorcurie			true		schema:identifier
+			name																														schema:name
+			description																														schema:description
+			primary_email																														schema:email
+			birth_date																									date					schema:birthDate
+			age_in_years																									integer
+			vital_status																									PersonStatus
+			entries													true	true									true		Person
+NamedThing	id|name|description
+Person	primary_email|birth_date|age_in_years|vital_status																	NamedThing
+Person			primary_email																								^\S+@[\S+\.]+\S+
+PersonCollection
+PersonCollection			entries													true	true									true		Person
