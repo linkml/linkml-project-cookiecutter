@@ -18,7 +18,7 @@ src/data/examples/invalid/{{cookiecutter.main_schema_class}}Collection-undefined
 	  --schema $^
 
 
-src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}_linkml_raw.yaml: src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}_dh.json
+src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}Collection_linkml_raw.yaml: src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}_dh.json
 	$(RUN) dh-json2linkml \
 		--input-file $< \
 		--output-file $@ \
@@ -26,16 +26,17 @@ src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}_linkml_raw.yaml: s
 		--key entries
 
 
-src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}_linkml_normalized.yaml: src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}_linkml_raw.yaml
+src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}Collection_linkml_normalized.yaml: src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}Collection_linkml_raw.yaml
 	$(RUN) linkml-normalize \
 		--schema {{cookiecutter.__source_path}} \
 		--output $@ \
 		--no-expand-all $<
 
-#src/data/data_harmonizer_io/soil_data.json: src/data/data_harmonizer_io/soil_for_linkml.json
-#	$(RUN) linkml-json2dh \
-#		--input-file $< \
-#		--output-dir $(dir $@)
+src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}Collection_linkml_normalized.json: src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}Collection_linkml_normalized.yaml
+	$(RUN) linkml-json2dh \
+		--input-file $< \
+		--input-format yaml \
+		--output-dir $(dir $@)
 
 project/reports/slot_usage_esp_validation.tsv:
 	linkml2sheets \
