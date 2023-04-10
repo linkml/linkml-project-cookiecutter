@@ -32,7 +32,7 @@ src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}Collection_linkml_n
 		--output $@ \
 		--no-expand-all $<
 
-src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}Collection_linkml_normalized.json: src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}Collection_linkml_normalized.yaml
+src/data/dh_vs_linkml_json/entries.json: src/data/dh_vs_linkml_json/{{cookiecutter.main_schema_class}}Collection_linkml_normalized.yaml
 	$(RUN) linkml-json2dh \
 		--input-file $< \
 		--input-format yaml \
