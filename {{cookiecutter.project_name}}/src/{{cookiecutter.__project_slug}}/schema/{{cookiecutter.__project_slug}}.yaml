@@ -41,7 +41,7 @@ classes:
       Represents a {{cookiecutter.main_schema_class}}
     slots:
       - primary_email
-      - birth_date
+#      - birth_date # DataHarmoizer is saving date-ranged data as datetimes
       - age_in_years
       - vital_status
     slot_usage:
