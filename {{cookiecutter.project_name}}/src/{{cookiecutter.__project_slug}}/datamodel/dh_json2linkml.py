@@ -9,7 +9,7 @@ import yaml
 @click.option('--output-file', '-o', type=click.Path(), required=True,
               help='Path to the output JSON file')
 @click.option('--key', '-k', required=True, help='Name of the key to assign the list to')
-@click.option('--output-format', '-f', type=click.Choice(['yaml', 'json'], case_sensitive=False),
+@click.option('--output-format', '-f', type=click.Choice(['yaml', 'json'], default="yaml", case_sensitive=False),
               help='Output format')
 def update_json(input_file, output_file, key, output_format):
     # Load the input JSON file
@@ -31,6 +31,8 @@ def update_json(input_file, output_file, key, output_format):
         # Save the updated object as a new JSON file
         with open(output_file, 'w') as f:
             json.dump(updated_data, f, indent=2)
+    # could we ever get some other value?
+    # should we warn?
 
     click.echo(f'Successfully updated JSON file with key "{key}"')
 
