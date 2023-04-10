@@ -15,7 +15,7 @@ def extract_lists(input_file, input_format, output_dir):
     if input_format == 'yaml':
         # Convert the dictionary to YAML
         with open(input_file, 'r') as f:
-            data = yaml.load(f)
+            data = yaml.safe_load(f)
     elif input_format == 'json':
         # Load the input JSON file
         with open(input_file, 'r') as f:
