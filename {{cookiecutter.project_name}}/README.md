@@ -31,5 +31,6 @@ Use the `make` command to generate project artefacts:
 
 ## Credits
 
-This project was made with
-[linkml-project-cookiecutter](https://github.com/linkml/linkml-project-cookiecutter).
+This project was made with [turbomam/examples-first-cookiecutter](https://github.com/turbomam/examples-first-cookiecutter), 
+a derivative of [linkml-project-cookiecutter](https://github.com/linkml/linkml-project-cookiecutter).
+
