@@ -131,15 +131,15 @@ gen-project: $(PYMODEL)
 
 # non-standard generations controlled by environment variables
 ifneq ($(strip ${GEN_OARGS}),)
-        $(RUN) gen-owl ${GEN_OARGS} -o $(DEST)/owl/{{cookiecutter.__project_slug}}.owl.ttl $(SOURCE_SCHEMA_PATH)
+	$(RUN) gen-owl ${GEN_OARGS} -o $(DEST)/owl/{{cookiecutter.__project_slug}}.owl.ttl $(SOURCE_SCHEMA_PATH)
 endif
 ifneq ($(strip ${GEN_JARGS}),)
-        mkdir project/java || true
-        $(RUN) gen-java ${GEN_JARGS} --output-directory $(DEST)/java/ $(SOURCE_SCHEMA_PATH)
+	mkdir project/java || true
+	$(RUN) gen-java ${GEN_JARGS} --output-directory $(DEST)/java/ $(SOURCE_SCHEMA_PATH)
 endif
 ifneq ($(strip ${GEN_TARGS}),)
-        mkdir project/typescript || true
-        $(RUN) gen-typescript ${GEN_TARGS} $(SOURCE_SCHEMA_PATH) >${DEST}/typescript/{{cookiecutter.__project_slug}}.ts
+	mkdir project/typescript || true
+	$(RUN) gen-typescript ${GEN_TARGS} $(SOURCE_SCHEMA_PATH) >${DEST}/typescript/{{cookiecutter.__project_slug}}.ts
 endif
 
 test: test-schema test-python test-examples
