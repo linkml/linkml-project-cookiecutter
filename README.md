@@ -53,12 +53,15 @@ poetry shell
 poetry add cruft
 ```
 
+_At this point, you can create any number of Examples-first LinkML repos in your linkml-projects directory. 
+There's generally no need to repeat the steps up to this point on any given computer._
+
 ### Step 3:  Use cruft to create your brand new LinkML project
 
 In your poetry virtual environment:
 
 ```bash
-cruft create https://github.com/linkml/linkml-project-cookiecutter
+cruft create https://github.com/turbomam/examples-first-cookiecutter
 ```
 
 You will be prompted for a few values.  The defaults are fine for most
