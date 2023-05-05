@@ -165,7 +165,13 @@ make serve
 
 1. Go to [https://github.com/new] and follow the instructions, being sure to
    NOT add a README or .gitignore file (this cookiecutter template will take
-   care of this for you)
+   care of this for you). 
+   
+   - Make sure the ownership of your new GitHub project is set to the user or organization you prefer
+   - Add a Repository name (presumably the same as the `project_name` above)
+   - Add a Description (presumably the same as the `project_description` above)
+   - Click "Create repository"
+   
 
 2. Add the remote to your local git repository
 
