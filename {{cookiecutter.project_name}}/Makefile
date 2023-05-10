@@ -197,3 +197,16 @@ clean:
 	rm -fr docs/*
 
 include project.Makefile
+
+target/usage_template.tsv: src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__project_slug}}.yaml
+	mkdir -p $(dir $@)
+	$(RUN) generate_and_populate_template \
+		 --columns-to-insert slot \
+		 --columns-to-insert class \
+		 --columns-to-remove annotations \
+		 --columns-to-remove name \
+		 --destination-template $@ \
+		 --intermediate-excel-file target/meta.xlsx \
+		 --meta-path https://raw.githubusercontent.com/linkml/linkml-model/main/linkml_model/model/schema/meta.yaml \
+		 --schema-path $< \
+		 --selected-sheet slot_definition
