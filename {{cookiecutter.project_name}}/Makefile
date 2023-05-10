@@ -200,7 +200,7 @@ include project.Makefile
 
 target/usage_template.tsv: src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__project_slug}}.yaml
 	mkdir -p $(dir $@)
-	$(RUN) generate_and_populate_template \
+	$(RUN) generate-and-populate-template \
 		 --columns-to-insert slot \
 		 --columns-to-insert class \
 		 --columns-to-remove annotations \
