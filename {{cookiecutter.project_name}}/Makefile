@@ -23,20 +23,11 @@ SHEET_TABS = $(shell ${SHELL} ./utils/get-value.sh google_sheet_tabs)
 SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
 
 # import environment variables
-ifdef LINKML_ENV_FILE
-include ${LINKML_ENV_FILE}
-else
-include custom.env
-endif
+include config.env
 
-GEN_PARGS=
-ifdef LINKML_GENERATORS_PROJECT_ARGS
-GEN_PARGS = ${LINKML_GENERATORS_PROJECT_ARGS}
-endif
-
-GEN_DARGS=
-ifdef LINKML_GENERATORS_DOC_ARGS
-GEN_DARGS = ${LINKML_GENERATORS_DOC_ARGS}
+GEN_MDARGS=
+ifdef LINKML_GENERATORS_MARKDOWN_ARGS
+GEN_MDARGS = ${LINKML_GENERATORS_MARKDOWN_ARGS}
 endif
 
 GEN_OARGS=
@@ -123,16 +114,15 @@ gen-examples:
 # generates all project files
 {% if cookiecutter.use_schemasheets == "Yes"  %}
 gen-project: $(PYMODEL) compile-sheets
-	$(RUN) gen-project ${GEN_PARGS} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+	$(RUN) gen-project --config-file config.yaml -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
 {% else %}
 gen-project: $(PYMODEL)
-	$(RUN) gen-project ${GEN_PARGS} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+	$(RUN) gen-project --config-file config.yaml -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
 {% endif %}
 
-# non-standard generations controlled by environment variables
-ifneq ($(strip ${GEN_OARGS}),)
-	$(RUN) gen-owl ${GEN_OARGS} -o $(DEST)/owl/{{cookiecutter.__project_slug}}.owl.ttl $(SOURCE_SCHEMA_PATH)
-endif
+#### extend gen-project default generations
+#### triggered by environment variables in config.env
+
 ifneq ($(strip ${GEN_JARGS}),)
 	mkdir project/java || true
 	$(RUN) gen-java ${GEN_JARGS} --output-directory $(DEST)/java/ $(SOURCE_SCHEMA_PATH)
@@ -142,10 +132,16 @@ ifneq ($(strip ${GEN_TARGS}),)
 	$(RUN) gen-typescript ${GEN_TARGS} $(SOURCE_SCHEMA_PATH) >${DEST}/typescript/{{cookiecutter.__project_slug}}.ts
 endif
 
+#### support workaround for 'config.yaml:owl:metadata_profile rdfs'
+#### triggered by environment variables in config.env
+ifneq ($(strip ${GEN_OARGS}),)
+	$(RUN) gen-owl ${GEN_OARGS} -o $(DEST)/owl/{{cookiecutter.__project_slug}}.owl.ttl $(SOURCE_SCHEMA_PATH)
+endif
+
 test: test-schema test-python test-examples
 
 test-schema:
-	$(RUN) gen-project ${GEN_PARGS} -d tmp $(SOURCE_SCHEMA_PATH)
+	$(RUN) gen-project --config-file config.yaml -d tmp $(SOURCE_SCHEMA_PATH)
 
 test-python:
 	$(RUN) python -m unittest discover
@@ -191,7 +187,7 @@ $(DOCDIR):
 
 gendoc: $(DOCDIR)
 	cp $(SRC)/docs/*md $(DOCDIR) ; \
-	$(RUN) gen-doc ${GEN_DARGS} -d $(DOCDIR) $(SOURCE_SCHEMA_PATH)
+	$(RUN) gen-doc ${GEN_MDARGS} -d $(DOCDIR) $(SOURCE_SCHEMA_PATH)
 
 testdoc: gendoc serve
 
@@ -204,7 +200,7 @@ git-init-add: git-init git-add git-commit git-status
 git-init:
 	git init
 git-add: .cruft.json
-	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/{{cookiecutter.__project_slug}}/schema/*yaml src/*/datamodel/*py src/data src/docs tests src/*/_version.py project custom.env
+	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/{{cookiecutter.__project_slug}}/schema/*yaml src/*/datamodel/*py src/data src/docs tests src/*/_version.py project config.env
 	git add $(patsubst %, project/%, $(PROJECT_FOLDERS)) || true
 git-commit:
 	git commit -m 'chore: make setup was run' -a

@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 env:
-  ENV_FILE: custom.env
+  ENV_FILE: config.env
 
 jobs:
   build-docs:
@@ -40,7 +40,7 @@ jobs:
         run: |
           mkdir -p docs
           touch docs/.nojekyll
-          poetry run gen-doc ${LINKML_GENERATORS_DOC_ARGS} -d docs src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__project_slug}}.yaml
+          poetry run gen-doc ${LINKML_GENERATORS_MARKDOWN_ARGS} -d docs src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__project_slug}}.yaml
           ([ ! -f docs/about.md ] && cp src/docs/about.md docs/) || true
           poetry run mkdocs gh-deploy
 

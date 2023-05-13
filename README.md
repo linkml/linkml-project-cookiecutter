@@ -109,15 +109,10 @@ For more docs, see
 
 ### Step 4: Setup the LinkML project
 
-Project generation uses linkml tool defaults. Optionally you can influence new defaults by passing arguments as environment variables inside `custom.env` file, which is respected by Makefile and GitHub Actions.
+Optionally, you can pass custom configuration to linkml generators by specifying the '--config-file config.yaml' command-line argument, and setting preferred options in the global 'custom.yaml' file. This is the standard linkml interface for that purpose. An example 'custom.yaml' file is supplied by this project to illustrate the interface.
 
-```bash
-LINKML_GENERATORS_PROJECT_ARGS=--no-mergeimports     # see `gen-project --help`
-LINKML_GENERATORS_DOC_ARGS=--no-mergeimports         # see `gen-doc --help`
-LINKML_GENERATORS_OWL_ARGS=--no-mergeimports         # see 'gen-owl --help`
-LINKML_GENERATORS_JAVA_ARGS=--no-mergeimports        # see 'gen-java --help`
-LINKML_GENERATORS_TYPESCRIPT_ARGS=--no-mergeimports  # see 'gen-typescript --help`
-```
+An extra layer of configurability is possible using environment variables via 'custom.env' file. This file manages nuances (i.e. gen-project excludes typescript/java generation, and github-workflows-deploy-docs cannot read config.yaml). An example 'custom.env' file is supplied for illustration.
+
 
 Change to the folder your generated project is in
 
