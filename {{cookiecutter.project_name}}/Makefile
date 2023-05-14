@@ -60,7 +60,7 @@ setup: install gen-project gen-examples gendoc git-init-add
 
 # install any dependencies required for building
 install:
-	git init     # issues/33
+	git init
 	poetry install
 .PHONY: install
 
@@ -186,5 +186,6 @@ clean:
 	rm -rf $(DEST)
 	rm -rf tmp
 	rm -fr docs/*
+	rm -fr $(PYMODEL)/*
 
 include project.Makefile
