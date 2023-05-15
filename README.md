@@ -109,13 +109,10 @@ For more docs, see
 
 ### Step 4: Setup the LinkML project
 
-Optionally set project generation environment variables
-(see `gen-doc --help` and `gen-project --help`):
+Optionally, pass custom configuration to linkml generators by tuning the global configuration file 'config.yaml' with preferred options. An example file is supplied by the project to illustrate interface and defaults.
 
-```bash
-export LINKML_COOKIECUTTER_GEN_DOC_ARGS=--no-mergeimports      # example
-export LINKML_COOKIECUTTER_GEN_PROJECT_ARGS=--no-mergeimports  # example
-```
+Additionally, pass command-line arguments to linkml generators inside the Makefile via environment variables in 'config.env' file. An example file is supplied by the project, passing '--config-file config.yaml' to gen-project.
+
 
 Change to the folder your generated project is in
 
