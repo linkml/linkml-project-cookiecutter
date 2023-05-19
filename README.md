@@ -168,7 +168,7 @@ make serve
 
 ### Step 10: Register the schema
 
-See [How to register a schema](../faq/contributing)
+See [How to register a schema](https://linkml.io/linkml/faq/contributing.html#how-do-i-register-my-schema)
 
 ## Keeping your project up to date
 
