@@ -46,7 +46,7 @@ help: status
 	@echo "make site -- makes site locally"
 	@echo "make install -- install dependencies"
 	@echo "make test -- runs tests"
-	@echo "make lint -- perfom linting"
+	@echo "make lint -- perform linting"
 	@echo "make testdoc -- builds docs and runs local test server"
 	@echo "make deploy -- deploys site"
 	@echo "make update -- updates linkml version"
@@ -67,7 +67,7 @@ install:
 .PHONY: install
 
 # ---
-# Project Syncronization
+# Project Synchronization
 # ---
 #
 # check we are up to date
