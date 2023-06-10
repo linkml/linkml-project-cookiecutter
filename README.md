@@ -138,7 +138,7 @@ make test
 
 ### Step 7: Auto-generate your documentation locally
 
-LinkML generates schema documenation automatically. Step 7 here, allows you to
+LinkML generates schema documentation automatically. Step 7 here, allows you to
 preview the documentation that LinkML generates before pushing to GitHub.
 Note, this template comes with GitHub Actions that autogenerate this
 documentation on release of your schema repository at a URL like this one:
