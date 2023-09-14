@@ -10,6 +10,7 @@ include = ["README.md", "src/{{cookiecutter.__project_slug}}/schema", "project"]
 [tool.poetry.dependencies]
 python = "^3.9"
 linkml-runtime = "^1.1.24"
+rdflib = "^6"  # Version 7 breaks compatibility: https://github.com/linkml/linkml/issues/1567
 
 [tool.poetry-dynamic-versioning]
 enable = true
