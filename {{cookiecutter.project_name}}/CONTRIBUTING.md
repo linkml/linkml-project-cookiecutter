@@ -71,3 +71,5 @@ and make your changes on a [new branch][about-branches].
 [about-pulls]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
 [issues]: https://github.com/{{ cookiecutter.github_org }}/{{ cookiecutter.project_name }}/issues/
 [pulls]: https://github.com/{{ cookiecutter.github_org }}/{{ cookiecutter.project_name }}/pulls/
+
+We recommend also reading [GitHub Pull Requests: 10 Tips to Know](https://blog.mergify.com/github-pull-requests-10-tips-to-know/)
