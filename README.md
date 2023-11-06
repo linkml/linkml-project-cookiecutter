@@ -121,7 +121,7 @@ cd my-awesome-schema  # using the folder example above
 make setup
 ```
 
-> **NOTE:** Until https://github.com/linkml/linkml-project-cookiecutter/issues/73 is resolved, this will give you an error (`AttributeError: 'str' object has no attribute 'decode'. Did you mean: 'encode'?`), see the issue for details. To circunvent this:
+> **NOTE:** Until https://github.com/linkml/linkml-project-cookiecutter/issues/73 is resolved, this will give you an error (`AttributeError: 'str' object has no attribute 'decode'. Did you mean: 'encode'?`), see the issue for details. To circumvent this:
 > * Delete the file `poetry.lock`
 > * In the file `pyproject.toml` add `rdflib = "6"` under `[tool.poetry.dependencies]`
 > * Run `make setup` again
