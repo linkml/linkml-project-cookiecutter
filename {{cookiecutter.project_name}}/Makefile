@@ -36,7 +36,7 @@ endif
 
 
 # basename of a YAML file in model/
-.PHONY: all clean
+.PHONY: all clean setup gen-project gen-examples gendoc git-init-add git-init git-add git-commit git-status
 
 # note: "help" MUST be the first target in the file,
 # when the user types "make" they should get help info
@@ -58,11 +58,10 @@ status: check-config
 	@echo "Source: $(SOURCE_SCHEMA_PATH)"
 
 # generate products and add everything to github
-setup: install gen-project gen-examples gendoc git-init-add
+setup: git-init install gen-project gen-examples gendoc git-add git-commit
 
 # install any dependencies required for building
 install:
-	git init
 	poetry install
 .PHONY: install
 
@@ -172,8 +171,7 @@ git-init-add: git-init git-add git-commit git-status
 git-init:
 	git init
 git-add: .cruft.json
-	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/{{cookiecutter.__project_slug}}/schema/*yaml src/*/datamodel/*py src/data src/docs tests src/*/_version.py
-	git add $(patsubst %, project/%, $(PROJECT_FOLDERS))
+	git add .
 git-commit:
 	git commit -m 'chore: initial commit' -a
 git-status:
