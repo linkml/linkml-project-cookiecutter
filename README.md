@@ -122,7 +122,7 @@ make test
 
 ### Step 5: Generate documentation locally
 
-LinkML generates schema documentation automatically. The template comes with GitHub Actions that generate and publish the documentation when you push schema changes to GitHub. The published documenation can be found at a URL like this one:
+LinkML generates schema documentation automatically. The template comes with GitHub Actions that generate and publish the documentation when you push schema changes to GitHub. The published documentation can be found at a URL like this one:
 `https://{github-user-or-organization}.github.io/{project-name}/`
 
 You can also preview the documentation locally before pushing to GitHub by running:
