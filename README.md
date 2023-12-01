@@ -4,7 +4,7 @@ A [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) template for pr
 
 ## Prerequisites
 
-The following are required and recommended tools for using this cookiecutter and the LinkML project that it generates. This is all one-time setup, so if you have already done it skip to the [next section]()!
+The following are required and recommended tools for using this cookiecutter and the LinkML project that it generates. This is all one-time setup, so if you have already done it skip to the [next section](#creating-a-new-project)!
 
   * **Python >= 3.8**
   
