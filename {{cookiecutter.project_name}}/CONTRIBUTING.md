@@ -11,9 +11,9 @@ in a pull request.
 
 * [Code of Conduct](#code-of-conduct)
 * [Guidelines for Contributions and Requests](#contributions)
-  * [Reporting problems with the data model](#reporting-bugs)
-  * [Requesting new terms](#requesting-terms)
-  * [Adding new terms yourself](#adding-terms)
+  * [Reporting issues and making requests](#reporting-issues)
+  * [Questions and Discussion](#questions-and-discussion)
+  * [Adding new elements yourself](#adding-elements)
 * [Best Practices](#best-practices)
   * [How to write a great issue](#great-issues)
   * [How to create a great pull/merge request](#great-pulls)
@@ -30,21 +30,24 @@ Please carefully read our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Guidelines for Contributions and Requests
 
-<a id="reporting-bugs"></a>
+<a id="reporting-issues"></a>
 
-### Reporting problems with the data model
+### Reporting problems and suggesting changes to with the data model
 
-Please use our [Issue Tracker][issues] to report problems with the data model.
+Please use our [Issue Tracker][issues] for any of the following:
 
-<a id="requesting-terms"></a>
+- Reporting problems
+- Requesting new schema elements
 
-### Requesting new terms
+<a id="questions-and-discussions"></a>
 
-Please use our [Issue Tracker][issues] to request changes to the model.
+### Questions and Discussions
 
-<a id="adding-terms"></a>
+Please use our [Discussions forum][discussions] to ask general questions or contribute to discussions.
 
-### Adding new terms yourself
+<a id="adding-elements"></a>
+
+### Adding new elements yourself
 
 Please submit a [Pull Request][pulls] to submit a new term for consideration.
 
