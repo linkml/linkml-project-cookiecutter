@@ -156,7 +156,7 @@ See [How to register a schema](https://linkml.io/linkml/faq/contributing.html#ho
 
 ### Making releases
 
-See [How to Manage Releases of your LinkML Schema](https://linkml.io/linkml/howtos/managing-releases.html)
+See [How to Manage Releases of your LinkML Schema](https://linkml.io/linkml/howtos/manage-releases.html)
 
 ## Keeping your project up to date
 
