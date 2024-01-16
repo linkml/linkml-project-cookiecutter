@@ -20,13 +20,13 @@ jobs:
         with:
           fetch-depth: 0  # otherwise, you will failed to push refs to dest repo
 
-      - name: Set up Python 3.
+      - name: Set up Python.
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
 
       - name: Install Poetry.
-        uses: snok/install-poetry@v1.3
+        run: pipx install poetry
 
       - name: Install dependencies.
         run: poetry install -E docs
