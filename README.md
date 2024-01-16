@@ -143,9 +143,20 @@ make serve
    git push -u origin main
    ```
 
+3. Configure your repository for deploying the documentation as GitHub pages
+
+* Under Settings > Actions > General in section "Workflow Permissions" mark "Read repository and packages permission".
+* Under Pages in section "Build and Deployment":
+  * Under "Source" select "Deploy from a branch"
+  * Under "Branch" select "gh-pages" and "/ (root)"
+
 ### Step 7: Register the schema
 
 See [How to register a schema](https://linkml.io/linkml/faq/contributing.html#how-do-i-register-my-schema)
+
+### Making releases
+
+See [How to Manage Releases of your LinkML Schema](https://linkml.io/linkml/howtos/manage-releases.html)
 
 ## Keeping your project up to date
 
