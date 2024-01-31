@@ -166,7 +166,6 @@ MKDOCS = $(RUN) mkdocs
 mkd-%:
 	$(MKDOCS) $*
 
-PROJECT_FOLDERS = sqlschema shex shacl protobuf prefixmap owl jsonschema jsonld graphql excel
 git-init-add: git-init git-add git-commit git-status
 git-init:
 	git init
