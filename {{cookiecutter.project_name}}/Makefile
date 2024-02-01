@@ -28,17 +28,29 @@ SHEET_ID = $(LINKML_SCHEMA_GOOGLE_SHEET_ID)
 SHEET_TABS = $(LINKML_SCHEMA_GOOGLE_SHEET_TABS)
 SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
 
-# environment variables
-include .env
-
-GEN_PARGS =
-ifdef LINKML_GENERATORS_PROJECT_ARGS
-GEN_PARGS = ${LINKML_GENERATORS_PROJECT_ARGS}
+CONFIG_YAML =
+ifdef LINKML_GENERATORS_CONFIG_YAML
+CONFIG_YAML = ${LINKML_GENERATORS_CONFIG_YAML}
 endif
 
-GEN_DARGS =
-ifdef LINKML_GENERATORS_MARKDOWN_ARGS
-GEN_DARGS = ${LINKML_GENERATORS_MARKDOWN_ARGS}
+GEN_DOC_ARGS =
+ifdef LINKML_GENERATORS_DOC_ARGS
+GEN_DOC_ARGS = ${LINKML_GENERATORS_DOC_ARGS}
+endif
+
+GEN_OWL_ARGS =
+ifdef LINKML_GENERATORS_OWL_ARGS
+GEN_OWL_ARGS = ${LINKML_GENERATORS_OWL_ARGS}
+endif
+
+GEN_JAVA_ARGS =
+ifdef LINKML_GENERATORS_JAVA_ARGS
+GEN_JAVA_ARGS = ${LINKML_GENERATORS_JAVA_ARGS}
+endif
+
+GEN_TS_ARGS =
+ifdef LINKML_GENERATORS_TYPESCRIPT_ARGS
+GEN_TS_ARGS = ${LINKML_GENERATORS_TYPESCRIPT_ARGS}
 endif
 
 
@@ -110,16 +122,29 @@ gen-examples:
 # generates all project files
 {% if cookiecutter.use_schemasheets == "Yes"  %}
 gen-project: $(PYMODEL) compile-sheets
-	$(RUN) gen-project ${GEN_PARGS} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+	$(RUN) gen-project ${CONFIG_YAML} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
 {% else %}
 gen-project: $(PYMODEL)
-	$(RUN) gen-project ${GEN_PARGS} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+	$(RUN) gen-project ${CONFIG_YAML} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
 {% endif %}
+
+# non-empty arg triggers owl (workaround https://github.com/linkml/linkml/issues/1453)
+ifneq ($(strip ${GEN_OWL_ARGS}),)
+       $(RUN) gen-owl ${GEN_OWL_ARGS} -o ${DEST}/owl/${SCHEMA_NAME}.owl.ttl $(SOURCE_SCHEMA_PATH)
+endif
+# non-empty arg triggers java
+ifneq ($(strip ${GEN_JAVA_ARGS}),)
+       $(RUN) gen-java ${GEN_JAVA_ARGS} --output-directory ${DEST}/java/ $(SOURCE_SCHEMA_PATH)
+endif
+# non-empty arg triggers typescript
+ifneq ($(strip ${GEN_TS_ARGS}),)
+       $(RUN) gen-typescript ${GEN_TS_ARGS} $(SOURCE_SCHEMA_PATH) >${DEST}/typescript/${SCHEMA_NAME}.ts
+endif
 
 test: test-schema test-python test-examples
 
 test-schema:
-	$(RUN) gen-project ${GEN_PARGS} -d tmp $(SOURCE_SCHEMA_PATH)
+	$(RUN) gen-project ${CONFIG_YAML} -d tmp $(SOURCE_SCHEMA_PATH)
 
 test-python:
 	$(RUN) python -m unittest discover
@@ -169,7 +194,7 @@ $(DOCDIR):
 
 gendoc: $(DOCDIR)
 	cp -rf $(SRC)/docs/* $(DOCDIR) ; \
-	$(RUN) gen-doc ${GEN_DARGS} -d $(DOCDIR) $(SOURCE_SCHEMA_PATH)
+	$(RUN) gen-doc ${GEN_DOC_ARGS} -d $(DOCDIR) $(SOURCE_SCHEMA_PATH)
 
 testdoc: gendoc serve
 
@@ -177,14 +202,13 @@ MKDOCS = $(RUN) mkdocs
 mkd-%:
 	$(MKDOCS) $*
 
-PROJECT_FOLDERS = sqlschema shex shacl protobuf prefixmap owl jsonschema jsonld graphql excel
 git-init-add: git-init git-add git-commit git-status
 git-init:
 	git init
 git-add: .cruft.json
 	git add .
 git-commit:
-	git commit -m 'chore: initial commit' -a
+	git commit -m 'chore: make setup was run' -a
 git-status:
 	git status
 
