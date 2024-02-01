@@ -1,7 +1,0 @@
----
-name: {{cookiecutter.__project_slug}}
-author: {{cookiecutter.__author}}
-description: {{cookiecutter.project_description}}
-source_schema_path: {{cookiecutter.__source_path}}
-google_sheet_id: {{cookiecutter.google_sheet_id}}
-google_sheet_tabs: {{cookiecutter.google_sheet_tabs}}
