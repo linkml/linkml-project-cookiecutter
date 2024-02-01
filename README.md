@@ -111,6 +111,7 @@ Optionally customize your project when necessary:
     - pass supported environment variables via 'config.env' configuration file;
     - configure proxy server via project configuration file (as illustrated):
       ```bash
+      git init
       poetry source add --priority=default myproxy https://repo.example.com/repository/pypi-all/simple
       ```
 
