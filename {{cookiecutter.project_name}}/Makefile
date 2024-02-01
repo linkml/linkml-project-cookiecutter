@@ -57,7 +57,7 @@ status: check-config
 	@echo "Source: $(SOURCE_SCHEMA_PATH)"
 
 # generate products and add everything to github
-setup: git-init install gen-project gen-examples gendoc git-add git-commit
+setup: check-config git-init install gen-project gen-examples gendoc git-add git-commit
 
 # install any dependencies required for building
 install:
