@@ -6,6 +6,17 @@ SHELL := bash
 .SUFFIXES:
 .SECONDARY:
 
+<<<<<<< HEAD
+=======
+# environment variables
+.EXPORT_ALL_VARIABLES:
+ifdef LINKML_ENVIRONMENT_FILENAME
+include ${LINKML_ENVIRONMENT_FILENAME}
+else
+include .env.public
+endif
+
+>>>>>>> 329b9fb (x)
 RUN = poetry run
 SCHEMA_NAME = ${LINKML_SCHEMA_NAME}
 SOURCE_SCHEMA_PATH = ${LINKML_SCHEMA_SOURCE_PATH}
@@ -21,7 +32,7 @@ SHEET_TABS = ${LINKML_SCHEMA_GOOGLE_SHEET_TABS}
 SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
 
 # environment variables
-include config.env
+include .env
 
 GEN_PARGS =
 ifdef LINKML_GENERATORS_PROJECT_ARGS
@@ -121,7 +132,7 @@ lint:
 
 check-config:
 ifndef LINKML_SCHEMA_NAME
-	$(error **Project not configured**:\n\n - See 'config.env'\n\n)
+	$(error **Project not configured**:\n\n - See '.env.public'\n\n)
 else
 	$(info Ok)
 endif
