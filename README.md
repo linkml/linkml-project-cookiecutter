@@ -24,6 +24,15 @@ The following are required and recommended tools for using this cookiecutter and
      ```
      For other installation methods see: https://python-poetry.org/docs/#installation
   
+  * **Poetry behind firewalls**
+
+    In sandboxed environments (proxy or internal repositories), you must configure poetry source in `~/.config/pypoetry/pyproject.toml` to allow software installation, illustrated below:
+    ```shell
+    [[tool.poetry.source]]
+    name = "myproxy"
+    url = "https://repo.example.com/repository/pypi-all/simple"
+    priority = "default"
+    ```
 
   * **Poetry Dynamic Versioning Plugin**: 
 
@@ -94,12 +103,18 @@ Suggestions:
 
 ### Step 2: Set up the LinkML project
 
-Optionally, pass custom configuration to linkml generators by tuning the global configuration file 'config.yaml' with preferred options. An example file is supplied by the project to illustrate interface and defaults.
+Change to the folder your generated project is in.
 
-Additionally, pass command-line arguments to linkml generators inside the Makefile via environment variables in 'config.env' file. An example file is supplied by the project, passing '--config-file config.yaml' to gen-project.
+Optionally customize your project when necessary:
 
-Change to the folder your generated project is in
+    - pass arguments to linkml generators via 'config.yaml' configuration file;
+    - pass supported environment variables via 'config.env' configuration file;
+    - configure proxy server via project configuration file (as illustrated):
+      ```bash
+      poetry source add --priority=default myproxy https://repo.example.com/repository/pypi-all/simple
+      ```
 
+Setup your project
 ```bash
 cd my-awesome-schema  # using the folder example above
 make setup
