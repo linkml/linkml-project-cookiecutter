@@ -173,7 +173,7 @@ git-init:
 git-add: .cruft.json
 	git add .
 git-commit:
-	git commit -m 'chore: initial commit' -a
+	git commit -m 'chore: make setup was run' -a
 git-status:
 	git status
 
