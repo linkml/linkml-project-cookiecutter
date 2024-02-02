@@ -11,13 +11,12 @@ SHELL := bash
 ifdef LINKML_ENVIRONMENT_FILENAME
 include ${LINKML_ENVIRONMENT_FILENAME}
 else
-include config.env
+include .env.public
 endif
 
 RUN = poetry run
-# get values from about.yaml file
-SCHEMA_NAME = $(shell ${SHELL} ./utils/get-value.sh name)
-SOURCE_SCHEMA_PATH = $(shell ${SHELL} ./utils/get-value.sh source_schema_path)
+SCHEMA_NAME = $(LINKML_SCHEMA_NAME)
+SOURCE_SCHEMA_PATH = $(LINKML_SCHEMA_SOURCE_PATH)
 SOURCE_SCHEMA_DIR = $(dir $(SOURCE_SCHEMA_PATH))
 SRC = src
 DEST = project
@@ -25,8 +24,8 @@ PYMODEL = $(SRC)/$(SCHEMA_NAME)/datamodel
 DOCDIR = docs
 EXAMPLEDIR = examples
 SHEET_MODULE = {{cookiecutter.__google_sheet_module}}
-SHEET_ID = $(shell ${SHELL} ./utils/get-value.sh google_sheet_id)
-SHEET_TABS = $(shell ${SHELL} ./utils/get-value.sh google_sheet_tabs)
+SHEET_ID = $(LINKML_SCHEMA_GOOGLE_SHEET_ID)
+SHEET_TABS = $(LINKML_SCHEMA_GOOGLE_SHEET_TABS)
 SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
 
 CONFIG_YAML =
@@ -78,7 +77,7 @@ status: check-config
 	@echo "Source: $(SOURCE_SCHEMA_PATH)"
 
 # generate products and add everything to github
-setup: git-init install gen-project gen-examples gendoc git-add git-commit
+setup: check-config git-init install gen-project gen-examples gendoc git-add git-commit
 
 # install any dependencies required for building
 install:
@@ -154,7 +153,11 @@ lint:
 	$(RUN) linkml-lint $(SOURCE_SCHEMA_PATH)
 
 check-config:
-	@(grep my-datamodel about.yaml > /dev/null && printf "\n**Project not configured**:\n\n  - Remember to edit 'about.yaml'\n\n" || exit 0)
+ifndef LINKML_SCHEMA_NAME
+	$(error **Project not configured**:\n\n - See '.env.public'\n\n)
+else
+	$(info Ok)
+endif
 
 convert-examples-to-%:
 	$(patsubst %, $(RUN) linkml-convert  % -s $(SOURCE_SCHEMA_PATH) -C Person, $(shell ${SHELL} find src/data/examples -name "*.yaml"))

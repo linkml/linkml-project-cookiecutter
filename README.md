@@ -109,15 +109,15 @@ Suggestions:
 
 Change to the folder your generated project is in.
 
-Optionally customize your project when necessary:
+Optionally customize your project if needed:
 
-    - pass arguments to linkml generators via 'config.yaml' configuration file;
-    - pass supported environment variables via 'config.env' configuration file;
-    - configure proxy server via project configuration file (as illustrated):
-      ```bash
-      git init
-      poetry source add --priority=default myproxy https://repo.example.com/repository/pypi-all/simple
-      ```
+* pass arguments to linkml generators via 'config.yaml' configuration file;
+* pass supported environment variables via '.env.public' configuration file;
+* configure proxy server via project configuration file (as illustrated):
+  ```bash
+  git init
+  poetry source add --priority=default myproxy https://repo.example.com/repository/pypi-all/simple
+  ```
 
 Setup your project
 ```bash
