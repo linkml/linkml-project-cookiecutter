@@ -55,9 +55,13 @@ The following are required and recommended tools for using this cookiecutter and
 ### Step 1: Generate the project files
 
 To generate a new LinkML project run the following:
-
 ```bash
 cruft create https://github.com/linkml/linkml-project-cookiecutter
+```
+Alternatively, to add linkml project files to pre-existing directory,
+(perhaps an existing non-linkml project), pass `-f` option:
+```bash
+cruft create -f https://github.com/linkml/linkml-project-cookiecutter
 ```
 
 You will be prompted for a few values.  The defaults are fine for most
