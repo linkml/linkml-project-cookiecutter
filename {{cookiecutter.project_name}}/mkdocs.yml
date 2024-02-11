@@ -16,6 +16,13 @@ nav:
   - About: about.md
 site_url: https://{{cookiecutter.github_org}}.github.io/{{cookiecutter.project_name}}
 repo_url: https://github.com/{{cookiecutter.github_org}}/{{cookiecutter.project_name}}
+markdown_extensions:
+  - tables
+extra_javascript:
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  - javascripts/tablesort.js
+  - https://unpkg.com/tablefilter@0.7.3/dist/tablefilter/tablefilter.js
+  - javascripts/tablefilter.js
 
 # Uncomment this block to enable use of Google Analytics.
 # Replace the property value with your own ID.
