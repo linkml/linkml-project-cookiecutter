@@ -130,15 +130,17 @@ gen-project: $(PYMODEL)
 
 # non-empty arg triggers owl (workaround https://github.com/linkml/linkml/issues/1453)
 ifneq ($(strip ${GEN_OWL_ARGS}),)
-       $(RUN) gen-owl ${GEN_OWL_ARGS} -o ${DEST}/owl/${SCHEMA_NAME}.owl.ttl $(SOURCE_SCHEMA_PATH)
+	mkdir -p ${DEST}/owl || true
+	$(RUN) gen-owl ${GEN_OWL_ARGS} $(SOURCE_SCHEMA_PATH) >${DEST}/owl/${SCHEMA_NAME}.owl.ttl
 endif
 # non-empty arg triggers java
 ifneq ($(strip ${GEN_JAVA_ARGS}),)
-       $(RUN) gen-java ${GEN_JAVA_ARGS} --output-directory ${DEST}/java/ $(SOURCE_SCHEMA_PATH)
+	$(RUN) gen-java ${GEN_JAVA_ARGS} --output-directory ${DEST}/java/ $(SOURCE_SCHEMA_PATH)
 endif
 # non-empty arg triggers typescript
 ifneq ($(strip ${GEN_TS_ARGS}),)
-       $(RUN) gen-typescript ${GEN_TS_ARGS} $(SOURCE_SCHEMA_PATH) >${DEST}/typescript/${SCHEMA_NAME}.ts
+	mkdir -p ${DEST}/typescript || true
+	$(RUN) gen-typescript ${GEN_TS_ARGS} $(SOURCE_SCHEMA_PATH) >${DEST}/typescript/${SCHEMA_NAME}.ts
 endif
 
 test: test-schema test-python test-examples
