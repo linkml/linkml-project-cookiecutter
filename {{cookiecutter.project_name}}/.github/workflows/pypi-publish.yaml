@@ -20,14 +20,19 @@ jobs:
 
       - name: Install Poetry
         run: |
-          pipx install poetry
-          poetry self add "poetry-dynamic-versioning[plugin]"
+          # run pip config here if needed
+          python3 -m pip install --user pipx
+          python3 -m pipx ensurepath
+          python3 -m pipx install poetry
+          ${HOME}/.local/bin/poetry self add "poetry-dynamic-versioning[plugin]"
 
       # - name: Install dependencies
-      #   run: poetry install --no-interaction
+      #   run: |
+      #     ${HOME}/.local/bin/poetry lock
+      #     ${HOME}/.local/bin/poetry install --no-interaction
 
       - name: Build source and wheel archives
-        run: poetry build
+        run: ${HOME}/.local/bin/poetry build
 
       - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@v1.2.2
