@@ -4,15 +4,27 @@ on:
   push:
     branches: [main]
 
+# Allow one concurent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build-docs:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
+
+    # if running inside container, provide details here
+    # container: {}
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
       contents: write  # to let mkdocs write the new docs
       pages: write     # to deploy to Pages
-      id-token: write  # to verify the deployment originates from an appropriate source
+      id-token: write  # to verify deployment is from an appropriate source
 
     steps:
       - name: Checkout
@@ -20,21 +32,48 @@ jobs:
         with:
           fetch-depth: 0  # otherwise, you will failed to push refs to dest repo
 
+      - name: Setup Pages
+        uses: actions/configure-pages@v1
+
+      # try python3 version management
       - name: Set up Python.
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
 
       - name: Install Poetry.
-        run: pipx install poetry
+        run: |
+          # run pip config here if required
+          # manage python3 version here if necessary
+          python3 -m pip install --user pipx
+          python3 -m pipx ensurepath
+          python3 -m pipx install poetry
 
       - name: Install dependencies.
-        run: poetry install -E docs
-
-      - name: Build documentation.
         run: |
+          ${HOME}/.local/bin/poetry lock
+          ${HOME}/.local/bin/poetry install -E docs
+
+      - name: Build documentation (gh-pages branch)
+        run: |
+          export PATH="${PATH}:${HOME}/.local/bin"
           mkdir -p docs
           touch docs/.nojekyll
           make gendoc
           ([ ! -f docs/about.md ] && cp src/docs/about.md docs/) || true
           make mkd-gh-deploy
+
+      ## When your github organization does not use gh-pages branch,
+      ## use custom upload/deploy steps illustrated below
+
+      # - name: Upload documentation (custom branch)
+      # uses: actions/upload-pages-artifact@v3
+      # with:
+      #   path: "${HOME}/work/{{ cookiecutter.project_name }}/{{ cookiecutter.project_name }}/site"
+
+      # - name: Deploy documentation (custom branch)
+      # id: deployment
+      # uses: actions/deploy-pages@v4
+      # env:
+      #   OPENSSL_CONF: ./openssl.cnf   # if needed
+      #   NODE_OPTIONS: "--openssl-shared-config"
