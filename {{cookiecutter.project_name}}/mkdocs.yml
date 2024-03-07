@@ -1,19 +1,40 @@
 ---
 site_name: "{{cookiecutter.project_name}}"
+docs_dir: docs
 theme:
   name: material
-  # palette:
-  #  scheme: slate
-  #  primary: cyan
+  palette:
+    scheme: dracula
+    primary: deep purple
+    accent: deep purple
   features:
     - content.tabs.link
+
 plugins:
   - search
-  - mermaid2
+  - mkdocs_pymdownx_material_extras
+  - mermaid2:
+      # prevent mkdocs-mermaid2-plugin from pulling (a version) from internet
+      # which does not work in sandboxed environment anyway
+      version: 10.8.0
+      javascript: ./js/mermaid.min.js
+
+markdown_extensions:
+  - pymdownx.superfences:
+      # make exceptions to highlighting of code
+      custom_fences:
+        # activate display of Mermaid diagrams
+        - name: mermaid
+          class: mermaid
+          # https://pypi.org/project/mkdocs-pymdownx-material-extras
+          # https://mkdocs-mermaid2.readthedocs.io/en/latest/superfences
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
 nav:
   # - Home: home.md
   - Index: index.md
   - About: about.md
+
 site_url: https://{{cookiecutter.github_org}}.github.io/{{cookiecutter.project_name}}
 repo_url: https://github.com/{{cookiecutter.github_org}}/{{cookiecutter.project_name}}
 
