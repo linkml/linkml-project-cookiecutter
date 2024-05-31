@@ -10,6 +10,8 @@ theme:
 plugins:
   - search
   - mermaid2
+  - mknotebooks:
+      execute: false
 nav:
   # - Home: home.md
   - Index: index.md
