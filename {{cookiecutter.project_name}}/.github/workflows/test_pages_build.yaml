@@ -1,4 +1,4 @@
-name: Preview cookiecutter.__project_slug}} documentation build
+name: Preview {{cookiecutter.__project_slug}} documentation build
 
 on:
   pull_request:
