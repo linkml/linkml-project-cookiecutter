@@ -38,6 +38,7 @@ SHEET_MODULE_PATH = Path(SOURCE_SCHEMA_PATH).parent / f"{SHEET_MODULE}.yaml"
 
 
 # Another output format that shows stdout also in case of successful execution
+{% raw %}
 PRETTY_FULL = (
     "{% if success %}<green>✓</green>"
     "{% elif nofail %}<yellow>✗</yellow>"
@@ -50,6 +51,7 @@ PRETTY_FULL = (
     "{{ output|trim|indent(2 * ' ') }}"
     "{% endif %}"
 )
+{% endraw %}
 
 def check_config():
     if "LINKML_SCHEMA_NAME" not in config:
