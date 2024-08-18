@@ -41,7 +41,6 @@ The following are required and recommended tools for using this cookiecutter and
     poetry self add "poetry-dynamic-versioning[plugin]"
     ```
 
-
   * **cruft**
 
     cruft is a tool for generating projects based on a cookiecutter (like this one!) as well as keeping those projects updated if the original cookiecutter changes. Install it with pipx by running:
@@ -49,6 +48,14 @@ The following are required and recommended tools for using this cookiecutter and
     pipx install cruft
     ```
     You may also choose to not have a persistent installation of cruft, in which case you would replace any calls to the `cruft` command below with `pipx run cruft`. 
+
+  * **make or duty as command runner**
+
+    The project contains a makefile but also a `duties.py`-file with pre-defined complex commands. To execute these commands you either need `make` or [duty](https://pawamoy.github.io/duty/) as an alternative command runner. Especially for Windows users we suggest duty. Install it by running:
+    ```shell
+    pipx install duty
+    pipx inject duty python-dotenv
+    ```
 
 ## Creating a new project
 
