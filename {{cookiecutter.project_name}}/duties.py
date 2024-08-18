@@ -31,7 +31,7 @@ EXAMPLEDIR = "examples"
 CONFIG_YAML = config.get("LINKML_GENERATORS_CONFIG_YAML", "")
 GEN_DOC_ARGS = config.get("LINKML_GENERATORS_GEN_DOC_ARGS", "")
 
-SHEET_MODULE = {{cookiecutter.__google_sheet_module}}
+SHEET_MODULE = "{{cookiecutter.__google_sheet_module}}"
 SHEET_ID = config.get("LINKML_SCHEMA_GOOGLE_SHEET_ID","")
 SHEET_TABS = config.get("LINKML_SCHEMA_GOOGLE_SHEET_TABS", "")
 SHEET_MODULE_PATH = Path(SOURCE_SCHEMA_PATH).parent / f"{SHEET_MODULE}.yaml"
