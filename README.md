@@ -18,20 +18,20 @@ The following are required and recommended tools for using this cookiecutter and
 
   * **Poetry**
   
-    Poetry is a Python project management tool. You will use it in your generated project to manage dependencies and build distribution files. If you have pipx installed you can install Poetry by running: 
+    Poetry is a Python project management tool. You will use it in your generated project to manage dependencies and build distribution files. If you have pipx installed ([alternative installation methods](https://python-poetry.org/docs/#installation) are available) you can install Poetry by running:
      ```shell
      pipx install poetry
      ```
-     For other installation methods see: https://python-poetry.org/docs/#installation
   
-  * **Poetry behind firewalls**
+    This project manages project-level configuration. User-level [configuration](https://python-poetry.org/docs/configuration/), if needed, is your responsibility.
 
-    In sandboxed environments (proxy or internal repositories), you must configure poetry source in `~/.config/pypoetry/pyproject.toml` to allow software installation, illustrated below:
+  * **Poetry private repository**
+
+    Sandboxed environments have private pypi repositories. Poetry supports project-level [repository](https://python-poetry.org/docs/repositories/), but it is recommended to configure [this plugin](https://pypi.org/project/poetry-plugin-pypi-mirror) to persist repository across all poetry projects (and avoid cookiecutter failure):
     ```shell
-    [[tool.poetry.source]]
-    name = "myproxy"
-    url = "https://repo.example.com/repository/pypi-all/simple"
-    priority = "default"
+    pip3 install poetry-plugin-pypi-mirror --user
+    # example, add line to `~/.profile` for persistence
+    export POETRY_PYPI_MIRROR_URL = "https://pypi-proxy.myorg.com/repository/pypi-all/simple"
     ```
 
   * **Poetry Dynamic Versioning Plugin**: 
@@ -113,11 +113,6 @@ Optionally customize your project if needed:
 
 * pass arguments to linkml generators via 'config.yaml' configuration file;
 * pass supported environment variables via '.env.public' configuration file;
-* configure proxy server via project configuration file (as illustrated):
-  ```bash
-  git init
-  poetry source add --priority=default myproxy https://repo.example.com/repository/pypi-all/simple
-  ```
 
 Setup your project
 ```bash
