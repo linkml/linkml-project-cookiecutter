@@ -1,23 +1,23 @@
 # This file defines tasks to be run with the duty command runner.
 # Docs: https://pawamoy.github.io/duty/usage/
 
-# Install: (this file also requires python-dotenv in the duty environment)
-#   pipx install duty
-#   pipx inject duty python-dotenv
-
+import sys
 from pathlib import Path
 
-from duty import duty
-from dotenv import dotenv_values
+try:
+    from duty import duty
+    from dotenv import dotenv_values
+except ImportError:
+    print("Please install duty and python-dotenv with\n"
+          "  pipx install duty\n"
+          "  pipx inject duty python-dotenv")
+    sys.exit(1)
 
 config = {
     **dotenv_values(".env.public"),  # load shared development variables
     #**dotenv_values(".env.secret"),  # load sensitive variables
     #**os.environ,  # override loaded values with environment variables
 }
-
-# from pprint import pprint
-# pprint(config)
 
 RUN = "poetry run"
 SCHEMA_NAME = config.get("LINKML_SCHEMA_NAME", "")
@@ -109,7 +109,7 @@ def setup(ctx):
 
     ctx.run("git add .cruft.json", title="Adding .cruft.json")
     ctx.run("git add .", title="Adding other untracked files")
-    # ctx.run("git commit -m 'chore: make setup was run' -a", title="Committing...")
+    ctx.run("git commit -m 'chore: make setup was run' -a", title="Committing...")
 
     # This shows how to get full output even on success by using a custom format.
     ctx.run("git status", title="Git status", fmt=f"custom={PRETTY_FULL}")
