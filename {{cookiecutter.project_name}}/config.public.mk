@@ -1,3 +1,5 @@
+# config.public.mk
+
 # This file is public in git. No sensitive info allowed.
 # These variables are sourced in Makefile, following make-file conventions.
 # Be aware that this file does not follow python or bash conventions, so may appear a little unfamiliar.

@@ -11,7 +11,7 @@ SHELL := bash
 ifdef LINKML_ENVIRONMENT_FILENAME
 include ${LINKML_ENVIRONMENT_FILENAME}
 else
-include .env.public
+include config.public.mk
 endif
 
 RUN = poetry run
