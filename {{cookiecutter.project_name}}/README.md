@@ -22,11 +22,13 @@
 
 ## Developer Documentation
 
-<details>
-Use the `make` command to generate project artefacts:
+To run commands you may use good old make or the command runner [duty](https://pawamoy.github.io/duty/) which is a better choice on Windows.
 
-* `make all`: make everything
-* `make deploy`: deploys site
+<details>
+Use the `make` command or `duty` commands to generate project artefacts:
+* `make help` or `duty --list`: list all pre-defined tasks
+* `make all` or `duty all`: make everything
+* `make deploy` or `duty deploy`: deploys site
 </details>
 
 ## Credits
