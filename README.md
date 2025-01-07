@@ -50,6 +50,14 @@ The following are required and recommended tools for using this cookiecutter and
     ```
     You may also choose to not have a persistent installation of cruft, in which case you would replace any calls to the `cruft` command below with `pipx run cruft`. 
 
+
+  * **make or just as command runner**
+
+    The project contains a makefile but also a `justfile` with pre-defined complex commands. To execute these commands you either need `make` or [just](https://github.com/casey/just) as an alternative command runner. Especially for Windows users we suggest `just`. Install it by running:
+    ```shell
+    pipx install just
+    ```
+
 ## Creating a new project
 
 ### Step 1: Generate the project files
