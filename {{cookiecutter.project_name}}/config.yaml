@@ -22,6 +22,8 @@ generator_args:
     mergeimports: true
   jsonldcontext:
     mergeimports: true
+  pydantic:
+    mergeimports: true
   python:
     mergeimports: true
   prefixmap:
