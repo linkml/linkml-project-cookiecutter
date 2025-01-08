@@ -12,6 +12,8 @@ plugins:
   - mermaid2
   - mknotebooks:
       execute: false
+  - mermaid2:
+      version: 10.9.0
 nav:
   # - Home: home.md
   - Index: index.md
