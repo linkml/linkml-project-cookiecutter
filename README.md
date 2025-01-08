@@ -6,7 +6,7 @@ A [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) template for pr
 
 The following are required and recommended tools for using this cookiecutter and the LinkML project that it generates. This is all one-time setup, so if you have already done it skip to the [next section](#creating-a-new-project)!
 
-  * **Python >= 3.8**
+  * **Python >= 3.9**
   
     LinkML tools are mainly written in Python, so you will need a recent Python interpreter to run this generator and to use the generated project.
 
