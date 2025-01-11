@@ -23,12 +23,13 @@ shebang := if os() == 'windows' {
 schema_name := env_var_or_default("LINKML_SCHEMA_NAME", "")
 source_schema_path := env_var_or_default("LINKML_SCHEMA_SOURCE_PATH", "")
 
+use_schemasheets := env_var_or_default("LINKML_USE_SCHEMASHEETS", "No")
 sheet_module := env_var_or_default("LINKML_SCHEMA_GOOGLE_SHEET_MODULE", "")
 sheet_ID := env_var_or_default("LINKML_SCHEMA_GOOGLE_SHEET_ID", "")
 sheet_tabs := env_var_or_default("LINKML_SCHEMA_GOOGLE_SHEET_TABS", "")
 sheet_module_path := source_schema_path / sheet_module + ".yaml"
 
-config_yaml := if env_var_or_default("LINKML_GENERATORS_CONFIG_YAML", "") == "" {
+config_yaml := if env_var_or_default("LINKML_GENERATORS_CONFIG_YAML", "") != "" {
   "--config-file " + env_var_or_default("LINKML_GENERATORS_CONFIG_YAML", "")
 } else {
   ""
@@ -93,8 +94,8 @@ deploy: site
   mkd-gh-deploy
 
 _compile_sheets:
-    @if [ ! -z "${{sheet_module}}" ]; then \
-    	poetry run sheets2linkml --gsheet-id {{sheet_ID}} {{sheet_tabs}} > {{sheet_module_path}}.tmp && \
+    @if [ "{{use_schemasheets}}" != "No" ]; then \
+        poetry run sheets2linkml --gsheet-id {{sheet_ID}} {{sheet_tabs}} > {{sheet_module_path}}.tmp && \
         mv {{sheet_module_path}}.tmp {{sheet_module_path}}; \
     fi
 
@@ -105,11 +106,10 @@ _gen-examples:
 
 # Generate project files
 _gen-project: _ensure_pymodel_dir _compile_sheets
-    poetry run gen-project {{config_yaml}} -d {{dest}} {{source_schema_path}}
+    poetry run gen-project {{config_yaml}} -d {{dest}} {{source_schema_path}} && \
     mv {{dest}}/*.py {{pymodel}}
-    poetry run gen-pydantic {{source_schema_path}} > "{{pymodel}}/{{schema_name}}_pydantic.py"
     @if [ ! -z "${{gen_owl_args}}" ]; then \
-      poetry run gen-owl {{gen_owl_args}} {{source_schema_path}} > {{dest}}/owl/{{schema_name}}.owl.ttl || true && \
+      mkdir -p {{dest}}/owl || true && \
       poetry run gen-owl {{gen_owl_args}} {{source_schema_path}} > {{dest}}/owl/{{schema_name}}.owl.ttl || true ; \
     fi
     @if [ ! ${{gen_java_args}} ]; then \
@@ -126,9 +126,9 @@ test: _test-schema _test-python _test-examples
 _test-schema:
     poetry run gen-project {{config_yaml}} -d tmp {{source_schema_path}}
 
-# Run Python unit tests
+# Run Python unit tests with pytest
 _test-python:
-    poetry run python -m unittest discover
+    poetry run python -m pytest
 
 # Run example tests
 _test-examples: _ensure_examples_output
@@ -138,7 +138,7 @@ _test-examples: _ensure_examples_output
         --counter-example-input-directory src/data/examples/invalid \
         --input-directory src/data/examples/valid \
         --output-directory examples/output \
-        --schema src/pid4cat_model/schema/pid4cat_model.yaml > examples/output/README.md
+        --schema {{source_schema_path}} > examples/output/README.md
 
 # Run linting
 lint:
