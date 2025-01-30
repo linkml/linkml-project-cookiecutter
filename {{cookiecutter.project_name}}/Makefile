@@ -24,7 +24,7 @@ PYMODEL = $(SRC)/$(SCHEMA_NAME)/datamodel
 DOCDIR = docs
 DOCTEMPLATES = $(SRC)/docs/templates
 EXAMPLEDIR = examples
-SHEET_MODULE = {{cookiecutter.__google_sheet_module}}
+SHEET_MODULE = $(LINKML_SCHEMA_GOOGLE_SHEET_MODULE)
 SHEET_ID = $(LINKML_SCHEMA_GOOGLE_SHEET_ID)
 SHEET_TABS = $(LINKML_SCHEMA_GOOGLE_SHEET_TABS)
 SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
@@ -32,6 +32,7 @@ SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
 # Use += to append variables from the variables file
 CONFIG_YAML =
 ifdef LINKML_GENERATORS_CONFIG_YAML
+CONFIG_YAML += "--config-file"
 CONFIG_YAML += ${LINKML_GENERATORS_CONFIG_YAML}
 endif
 
@@ -151,7 +152,7 @@ test-schema:
 	$(RUN) gen-project ${CONFIG_YAML} -d tmp $(SOURCE_SCHEMA_PATH)
 
 test-python:
-	$(RUN) python -m unittest discover
+	$(RUN) python -m pytest
 
 lint:
 	$(RUN) linkml-lint $(SOURCE_SCHEMA_PATH)
@@ -175,7 +176,7 @@ examples/%.ttl: src/data/examples/%.yaml
 
 test-examples: examples/output
 
-examples/output: src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__project_slug}}.yaml
+examples/output: src/$(SCHEMA_NAME)/schema/$(SCHEMA_NAME).yaml
 	mkdir -p $@
 	$(RUN) linkml-run-examples \
 		--output-formats json \
@@ -224,7 +225,7 @@ git-status:
 clean:
 	rm -rf $(DEST)
 	rm -rf tmp
-	rm -fr docs/*
+	rm -fr $(DOCDIR)/*
 	rm -fr $(PYMODEL)/*
 
 include project.Makefile
