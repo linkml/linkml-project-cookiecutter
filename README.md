@@ -55,7 +55,7 @@ The following are required and recommended tools for using this cookiecutter and
 
     The project contains a makefile but also a `justfile` with pre-defined complex commands. To execute these commands you either need `make` or [just](https://github.com/casey/just) as an alternative command runner. Especially for Windows users we suggest `just`. Install it by running:
     ```shell
-    pipx install just
+    pipx install rust-just
     ```
 
 ## Creating a new project
