@@ -1,7 +1,8 @@
 /docs/
 /project/docs/
 /tmp/
-.idea/  # PyCharm files
+# PyCharm files
+.idea/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
