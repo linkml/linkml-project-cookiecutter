@@ -7,22 +7,29 @@ A [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) template for pr
 The following are required and recommended tools for using this cookiecutter and the LinkML project that it generates. This is all one-time setup, so if you have already done it skip to the [next section](#creating-a-new-project)!
 
   * **Python >= 3.9**
-  
+
     LinkML tools are mainly written in Python, so you will need a recent Python interpreter to run this generator and to use the generated project.
 
-
   * **pipx**
-  
+
     pipx is a tool for managing isolated Python-based applications. It is the recommended way to install Poetry and cruft. To install pipx follow the instructions here: https://pypa.github.io/pipx/installation/
 
-
   * **Poetry**
-  
-    Poetry is a Python project management tool. You will use it in your generated project to manage dependencies and build distribution files. If you have pipx installed ([alternative installation methods](https://python-poetry.org/docs/#installation) are available) you can install Poetry by running:
+
+    Poetry is a Python project management tool. You will use it in your generated project to manage dependencies and build distribution files. The template requires poetry version 2.0 or newer. If you have pipx installed ([alternative installation methods](https://python-poetry.org/docs/#installation) are available) you can install Poetry by running:
+
      ```shell
      pipx install poetry
      ```
-  
+
+    - For having both Poetry 2.x and Poetry 1.x installed at the same time,
+      pipx has the option to install another version with a suffix-modified name,
+      here "poetry1",
+
+      ```bash
+        `pipx install --suffix=1 "poetry<2.0"`.
+      ```
+
     This project manages project-level configuration. User-level [configuration](https://python-poetry.org/docs/configuration/), if needed, is your responsibility.
 
   * **Poetry private repository**
@@ -34,7 +41,7 @@ The following are required and recommended tools for using this cookiecutter and
     export POETRY_PYPI_MIRROR_URL = "https://pypi-proxy.myorg.com/repository/pypi-all/simple"
     ```
 
-  * **Poetry Dynamic Versioning Plugin**: 
+  * **Poetry Dynamic Versioning Plugin**:
 
     This plugin automatically updates certain version strings in your generated project when you publish it. Your generated project will automatically be set up to use it. Install it by running:
     ```shell
@@ -48,7 +55,7 @@ The following are required and recommended tools for using this cookiecutter and
     ```shell
     pipx install cruft
     ```
-    You may also choose to not have a persistent installation of cruft, in which case you would replace any calls to the `cruft` command below with `pipx run cruft`. 
+    You may also choose to not have a persistent installation of cruft, in which case you would replace any calls to the `cruft` command below with `pipx run cruft`.
 
 
   * **make or just as command runner**
