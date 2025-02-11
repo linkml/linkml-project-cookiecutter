@@ -1,7 +1,6 @@
-# Example data object
+# Example for a valid data object
 ---
-entries:
-  - id: example:{{cookiecutter.main_schema_class}}001
-    name: foo bar
-    primary_email: foo.bar@example.com
-    age_in_years: 33
+id: "001"
+name: foo bar
+primary_email: foo.bar@example.com
+age_in_years: 33
