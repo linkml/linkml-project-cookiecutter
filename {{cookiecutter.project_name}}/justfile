@@ -102,7 +102,7 @@ _compile_sheets:
 # Generate examples
 _gen-examples:
     mkdir -p {{exampledir}}
-    cp src/data/examples/* {{exampledir}}
+    cp -r src/data/examples/* {{exampledir}}
 
 # Generate project files
 _gen-project: _ensure_pymodel_dir _compile_sheets
