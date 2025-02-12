@@ -12,21 +12,17 @@ license = "{{cookiecutter.license}}"
 readme = "README.md"
 include = ["README.md", "src/{{cookiecutter.__project_slug}}/schema", "project"]
 
-requires-python = ">=3.9"
+requires-python = ">=3.9,<4.0"
 
 dynamic = ["version"]
 
 dependencies = [
-  "linkml-runtime >=1.8.0",
+  "linkml-runtime >=1.1.24",
 ]
 
 [tool.poetry]
 requires-poetry = ">=2.0"
 version = "0.0.0"
-
-[tool.poetry.dependencies]
-python = "^3.9"
-linkml-runtime = "^1.1.24"
 
 [tool.poetry.requires-plugins]
 poetry-dynamic-versioning = ">=1.5.2"
