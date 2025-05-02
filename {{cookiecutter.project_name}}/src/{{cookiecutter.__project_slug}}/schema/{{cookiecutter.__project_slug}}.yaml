@@ -13,7 +13,7 @@ prefixes:
   linkml: https://w3id.org/linkml/
   biolink: https://w3id.org/biolink/
   schema: http://schema.org/
-  PATO: http://purl.obolibrary.org/obo/PATO_
+  PATO: http://purl.obolibrary.org/obo/PATO
   example: https://example.org/
 default_prefix: {{cookiecutter.__project_slug}}
 default_range: string
