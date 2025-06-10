@@ -11,7 +11,7 @@ SHELL := bash
 ifdef LINKML_ENVIRONMENT_FILENAME
 include ${LINKML_ENVIRONMENT_FILENAME}
 else
-include .env.public
+include config.public.mk
 endif
 
 RUN = poetry run
@@ -22,35 +22,38 @@ SRC = src
 DEST = project
 PYMODEL = $(SRC)/$(SCHEMA_NAME)/datamodel
 DOCDIR = docs
+DOCTEMPLATES = $(SRC)/docs/templates
 EXAMPLEDIR = examples
-SHEET_MODULE = {{cookiecutter.__google_sheet_module}}
+SHEET_MODULE = $(LINKML_SCHEMA_GOOGLE_SHEET_MODULE)
 SHEET_ID = $(LINKML_SCHEMA_GOOGLE_SHEET_ID)
 SHEET_TABS = $(LINKML_SCHEMA_GOOGLE_SHEET_TABS)
 SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
 
+# Use += to append variables from the variables file
 CONFIG_YAML =
 ifdef LINKML_GENERATORS_CONFIG_YAML
-CONFIG_YAML = ${LINKML_GENERATORS_CONFIG_YAML}
+CONFIG_YAML += "--config-file"
+CONFIG_YAML += ${LINKML_GENERATORS_CONFIG_YAML}
 endif
 
 GEN_DOC_ARGS =
 ifdef LINKML_GENERATORS_DOC_ARGS
-GEN_DOC_ARGS = ${LINKML_GENERATORS_DOC_ARGS}
+GEN_DOC_ARGS += ${LINKML_GENERATORS_DOC_ARGS}
 endif
 
 GEN_OWL_ARGS =
 ifdef LINKML_GENERATORS_OWL_ARGS
-GEN_OWL_ARGS = ${LINKML_GENERATORS_OWL_ARGS}
+GEN_OWL_ARGS += ${LINKML_GENERATORS_OWL_ARGS}
 endif
 
 GEN_JAVA_ARGS =
 ifdef LINKML_GENERATORS_JAVA_ARGS
-GEN_JAVA_ARGS = ${LINKML_GENERATORS_JAVA_ARGS}
+GEN_JAVA_ARGS += ${LINKML_GENERATORS_JAVA_ARGS}
 endif
 
 GEN_TS_ARGS =
 ifdef LINKML_GENERATORS_TYPESCRIPT_ARGS
-GEN_TS_ARGS = ${LINKML_GENERATORS_TYPESCRIPT_ARGS}
+GEN_TS_ARGS += ${LINKML_GENERATORS_TYPESCRIPT_ARGS}
 endif
 
 
@@ -117,7 +120,7 @@ compile-sheets:
 
 # In future this will be done by conversion
 gen-examples:
-	cp src/data/examples/* $(EXAMPLEDIR)
+	cp -r src/data/examples/* $(EXAMPLEDIR)
 
 # generates all project files
 {% if cookiecutter.use_schemasheets == "Yes"  %}
@@ -149,7 +152,7 @@ test-schema:
 	$(RUN) gen-project ${CONFIG_YAML} -d tmp $(SOURCE_SCHEMA_PATH)
 
 test-python:
-	$(RUN) python -m unittest discover
+	$(RUN) python -m pytest
 
 lint:
 	$(RUN) linkml-lint $(SOURCE_SCHEMA_PATH)
@@ -173,7 +176,7 @@ examples/%.ttl: src/data/examples/%.yaml
 
 test-examples: examples/output
 
-examples/output: src/{{cookiecutter.__project_slug}}/schema/{{cookiecutter.__project_slug}}.yaml
+examples/output: src/$(SCHEMA_NAME)/schema/$(SCHEMA_NAME).yaml
 	mkdir -p $@
 	$(RUN) linkml-run-examples \
 		--output-formats json \
@@ -195,7 +198,7 @@ $(DOCDIR):
 	mkdir -p $@
 
 gendoc: $(DOCDIR)
-	cp -rf $(SRC)/docs/* $(DOCDIR) ; \
+	cp -rf $(SRC)/docs/files/* $(DOCDIR) ; \
 	$(RUN) gen-doc ${GEN_DOC_ARGS} -d $(DOCDIR) $(SOURCE_SCHEMA_PATH)
 
 testdoc: gendoc serve
@@ -222,7 +225,7 @@ git-status:
 clean:
 	rm -rf $(DEST)
 	rm -rf tmp
-	rm -fr docs/*
+	rm -fr $(DOCDIR)/*
 	rm -fr $(PYMODEL)/*
 
 include project.Makefile
