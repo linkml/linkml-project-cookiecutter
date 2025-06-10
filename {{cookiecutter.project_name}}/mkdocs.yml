@@ -4,9 +4,9 @@ theme:
   name: material
   palette:
     # https://github.com/facelessuser/mkdocs_pymdownx_material_extras
-    scheme: dracula
-    primary: deep purple
-    accent: deep purple
+    # palette:
+    #  scheme: slate
+    #  primary: cyan
   features:
     - content.tabs.link
 
