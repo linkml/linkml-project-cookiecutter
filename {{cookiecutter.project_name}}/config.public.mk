@@ -6,14 +6,15 @@
 
 ###### schema definition variables, used by makefile
 
-# Note: makefile variables should not be quoted, as makefile handles quoting differently than bash
-LINKML_SCHEMA_NAME="{{cookiecutter.__project_slug}}"
-LINKML_SCHEMA_AUTHOR="{{cookiecutter.__author}}"
-LINKML_SCHEMA_DESCRIPTION="{{cookiecutter.project_description}}"
-LINKML_SCHEMA_SOURCE_PATH="{{cookiecutter.__source_path}}"
-LINKML_SCHEMA_GOOGLE_SHEET_MODULE="{{cookiecutter.__google_sheet_module}}"
-LINKML_SCHEMA_GOOGLE_SHEET_ID="{{cookiecutter.google_sheet_id}}"
-LINKML_SCHEMA_GOOGLE_SHEET_TABS="{{cookiecutter.google_sheet_tabs}}"
+# Note: makefile variables should not be quoted
+
+LINKML_SCHEMA_NAME={{cookiecutter.__project_slug}}
+LINKML_SCHEMA_AUTHOR={{cookiecutter.__author}}
+LINKML_SCHEMA_DESCRIPTION={{cookiecutter.project_description}}
+LINKML_SCHEMA_SOURCE_PATH={{cookiecutter.__source_path}}
+LINKML_SCHEMA_GOOGLE_SHEET_MODULE={{cookiecutter.__google_sheet_module}}
+LINKML_SCHEMA_GOOGLE_SHEET_ID={{cookiecutter.google_sheet_id}}
+LINKML_SCHEMA_GOOGLE_SHEET_TABS={{cookiecutter.google_sheet_tabs}}
 LINKML_USE_SCHEMASHEETS={{cookiecutter.use_schemasheets}}
 
 ###### linkml generator variables, used by makefile
