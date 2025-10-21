@@ -15,8 +15,8 @@ plugins:
   - mermaid2:
       version: 10.9.0
 nav:
-  # - Home: home.md
-  - Index: index.md
+  # https://github.com/linkml/linkml/issues/1708
+  - Index: index_{{cookiecutter.project_name}}.md
   - About: about.md
 site_url: https://{{cookiecutter.github_org}}.github.io/{{cookiecutter.project_name}}
 repo_url: https://github.com/{{cookiecutter.github_org}}/{{cookiecutter.project_name}}

@@ -36,7 +36,8 @@ CONFIG_YAML += "--config-file"
 CONFIG_YAML += ${LINKML_GENERATORS_CONFIG_YAML}
 endif
 
-GEN_DOC_ARGS =
+# https://github.com/linkml/linkml/issues/1708
+GEN_DOC_ARGS = --index-name index_$(SCHEMA_NAME)
 ifdef LINKML_GENERATORS_DOC_ARGS
 GEN_DOC_ARGS += ${LINKML_GENERATORS_DOC_ARGS}
 endif
