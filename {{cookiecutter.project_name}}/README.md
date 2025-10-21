@@ -8,9 +8,11 @@
 
 ## Repository Structure
 
-* [examples/](examples/) - example data
+* [examples/](examples/) - example data (do not edit these)
 * [project/](project/) - project files (do not edit these)
 * [src/](src/) - source files (edit these)
+  * [data](src/data)
+    * [examples](src/data/examples) --- example data conforming to LinkML schema
   * [{{cookiecutter.__project_slug}}](src/{{cookiecutter.__project_slug}})
     * [schema](src/{{cookiecutter.__project_slug}}/schema) -- LinkML schema
       (edit this)
