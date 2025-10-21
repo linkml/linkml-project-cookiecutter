@@ -58,7 +58,7 @@ endif
 
 
 # basename of a YAML file in model/
-.PHONY: all clean setup gen-project gen-examples gendoc git-init-add git-init git-add git-commit git-status
+.PHONY: all clean setup gen-project gen-examples gen-prefixes gendoc git-init-add git-init git-add git-commit git-status
 
 # note: "help" MUST be the first target in the file,
 # when the user types "make" they should get help info
@@ -80,7 +80,7 @@ status: check-config
 	@echo "Source: $(SOURCE_SCHEMA_PATH)"
 
 # generate products and add everything to github
-setup: check-config git-init install gen-project gen-examples gendoc git-add git-commit
+setup: check-config git-init install gen-project gen-examples gen-prefixes gendoc git-add git-commit
 
 # install any dependencies required for building
 install:
@@ -111,7 +111,7 @@ create-data-harmonizer:
 	npm init data-harmonizer $(SOURCE_SCHEMA_PATH)
 
 all: site
-site: gen-project gendoc
+site: gen-project gendoc gen-prefixes
 %.yaml: gen-project
 deploy: all mkd-gh-deploy
 
@@ -121,6 +121,10 @@ compile-sheets:
 # In future this will be done by conversion
 gen-examples:
 	cp -r src/data/examples/* $(EXAMPLEDIR)
+
+# prefix generator
+gen-prefixes:
+	gen-prefix-map $(SOURCE_SCHEMA_PATH) -o ${DEST}/prefixmap/${SCHEMA_NAME}.json
 
 # generates all project files
 {% if cookiecutter.use_schemasheets == "Yes"  %}
