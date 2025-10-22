@@ -1,5 +1,7 @@
 # {{cookiecutter.project_name}}
 
+This "LinkML project" includes a standard repository structure and `Makefile` necessary to allow faster schema build and test iterations, helping novice and experienced users focus on LinkML productivity.
+
 {{cookiecutter.project_description}}
 
 ## Website
