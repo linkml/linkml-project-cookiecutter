@@ -1,16 +1,16 @@
----
-name: Auto-deployment of {{cookiecutter.__project_slug}} Documentation
-on:
-  push:
-    branches: [main]
+name: Preview {{cookiecutter.__project_slug}} documentation build
 
-# Only allow one queued (and one in-progress) deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+concurrency: {% raw %}preview-${{ github.ref }}{% endraw %}
 
 jobs:
-  build-docs:
+  run:
     runs-on: ubuntu-latest
     # if running inside container, provide details here
     # container: {}
@@ -19,20 +19,9 @@ jobs:
       matrix:
         python-version: [ "3.12" ]
 
-    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
-    permissions:
-      contents: write  # to let mkdocs write the new docs
-      pages: write     # to deploy to Pages
-      id-token: write  # to verify deployment is from an appropriate source
-
     steps:
-      - name: Checkout
+      - name: Check out repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # otherwise, we fail to push refs to dest repo
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6
@@ -52,11 +41,16 @@ jobs:
           poetry lock
           poetry install -E docs
 
-      - name: Build documentation.
+      - name: Build documentation
         run: |
-          mkdir -p docs
-          touch docs/.nojekyll
+          mkdir -p site
+          touch site/.nojekyll
           make gendoc
           ([ ! -f docs/about.md ] && cp src/docs/about.md docs/) || true
-          make mkd-gh-deploy
+          poetry run mkdocs build -d site
 
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: site/
+          preview-branch: gh-pages

@@ -6,35 +6,43 @@ A [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) template for pr
 
 The following are required and recommended tools for using this cookiecutter and the LinkML project that it generates. This is all one-time setup, so if you have already done it skip to the [next section](#creating-a-new-project)!
 
-  * **Python >= 3.8**
-  
-    LinkML tools are mainly written in Python, so you will need a recent Python interpreter to run this generator and to use the generated project.
+  * **Python >= 3.9**
 
+    LinkML tools are mainly written in Python, so you will need a [recent Python interpreter](https://devguide.python.org/versions/) to run this generator and to use the generated project.
 
   * **pipx**
-  
-    pipx is a tool for managing isolated Python-based applications. It is the recommended way to install Poetry and cruft. To install pipx follow the instructions here: https://pypa.github.io/pipx/installation/
 
+    pipx is a tool for managing isolated Python-based applications. It is the recommended way to install Poetry and cruft. Install pipx using [these instructions](https://pypa.github.io/pipx/installation/).
 
   * **Poetry**
-  
-    Poetry is a Python project management tool. You will use it in your generated project to manage dependencies and build distribution files. If you have pipx installed you can install Poetry by running: 
+
+    Poetry is a Python project management tool. You will use it in your generated project to manage dependencies and build distribution files. The template requires poetry version 2.0 or newer. See [installation guide](https://python-poetry.org/docs/#installation), or simply use pipx:
+
      ```shell
      pipx install poetry
      ```
-     For other installation methods see: https://python-poetry.org/docs/#installation
-  
-  * **Poetry behind firewalls**
 
-    In sandboxed environments (proxy or internal repositories), you must configure poetry source in `~/.config/pypoetry/pyproject.toml` to allow software installation, illustrated below:
+    - For having both Poetry 2.x and Poetry 1.x installed at the same time,
+      pipx has the option to install another version with a suffix-modified name,
+      here "poetry1",
+      ```bash
+        `pipx install --suffix=1 "poetry<2.0"`.
+      ```
+
+    - For pipx metadata errors, see [fix](https://github.com/pypa/pipx/issues/1619#issuecomment-3416448489).
+
+    - This project manages project-level configuration. User-level [configuration](https://python-poetry.org/docs/configuration/), if needed, is your responsibility.
+
+  * **Poetry private repository**
+
+    Sandboxed environments have private pypi repositories. Poetry supports project-level [repository](https://python-poetry.org/docs/repositories/), but [this plugin](https://pypi.org/project/poetry-plugin-pypi-mirror) is recommended as global configuration:
     ```shell
-    [[tool.poetry.source]]
-    name = "myproxy"
-    url = "https://repo.example.com/repository/pypi-all/simple"
-    priority = "default"
+    pipx inject poetry poetry-plugin-pypi-mirror
+    # example, add line to `~/.profile` for persistence
+    export POETRY_PYPI_MIRROR_URL = "https://pypi-proxy.myorg.com/repository/pypi-all/simple"
     ```
 
-  * **Poetry Dynamic Versioning Plugin**: 
+  * **Poetry Dynamic Versioning Plugin**:
 
     This plugin automatically updates certain version strings in your generated project when you publish it. Your generated project will automatically be set up to use it. Install it by running:
     ```shell
@@ -48,7 +56,15 @@ The following are required and recommended tools for using this cookiecutter and
     ```shell
     pipx install cruft
     ```
-    You may also choose to not have a persistent installation of cruft, in which case you would replace any calls to the `cruft` command below with `pipx run cruft`. 
+    You may also choose to not have a persistent installation of cruft, in which case you would replace any calls to the `cruft` command below with `pipx run cruft`.
+
+
+  * **make or just as command runner**
+
+    The project contains a makefile but also a `justfile` with pre-defined complex commands. To execute these commands you either need `make` or [just](https://github.com/casey/just) as an alternative command runner. Especially for Windows users we suggest `just`. Install it by running:
+    ```shell
+    pipx install rust-just
+    ```
 
 ## Creating a new project
 
@@ -113,11 +129,6 @@ Optionally customize your project if needed:
 
 * pass arguments to linkml generators via 'config.yaml' configuration file;
 * pass supported environment variables via '.env.public' configuration file;
-* configure proxy server via project configuration file (as illustrated):
-  ```bash
-  git init
-  poetry source add --priority=default myproxy https://repo.example.com/repository/pypi-all/simple
-  ```
 
 Setup your project
 ```bash
