@@ -1,8 +1,10 @@
 # LinkML Project Cookiecutter
 
-A [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) template for projects using [LinkML](https://github.com/linkml/linkml).
+## PLEASE NOTE: This repository is deprecated! Instead, please consider using [linkml-project-copier](https://github.com/linkml/linkml-project-copier)
 
-## Prerequisites
+-------------------------------------------------------------------------------------------------------
+
+#### Prerequisites
 
 The following are required and recommended tools for using this cookiecutter and the LinkML project that it generates. This is all one-time setup, so if you have already done it skip to the [next section](#creating-a-new-project)!
 
@@ -66,9 +68,9 @@ The following are required and recommended tools for using this cookiecutter and
     pipx install rust-just
     ```
 
-## Creating a new project
+#### Creating a new project
 
-### Step 1: Generate the project files
+##### Step 1: Generate the project files
 
 To generate a new LinkML project run the following:
 ```bash
@@ -121,7 +123,7 @@ Suggestions:
     - This should be ignored if this is not a python project
     - Even if this is a python project, you can leave blank and fill in later
 
-### Step 2: Set up the LinkML project
+##### Step 2: Set up the LinkML project
 
 Change to the folder your generated project is in.
 
@@ -136,7 +138,7 @@ cd my-awesome-schema  # using the folder example above
 make setup
 ```
 
-### Step 3: Edit the schema
+##### Step 3: Edit the schema
 
 Edit the schema (the .yaml file) in the
 `src/my_awesome_schema/schema` folder
@@ -145,13 +147,13 @@ Edit the schema (the .yaml file) in the
 nano src/my_awesome_schema/schema/my_awesome_schema.yaml
 ```
 
-### Step 4: Validate the schema
+##### Step 4: Validate the schema
 
 ```bash
 make test
 ```
 
-### Step 5: Generate documentation locally
+##### Step 5: Generate documentation locally
 
 LinkML generates schema documentation automatically. The template comes with GitHub Actions that generate and publish the documentation when you push schema changes to GitHub. The published documentation can be found at a URL like this one:
 `https://{github-user-or-organization}.github.io/{project-name}/`
@@ -162,7 +164,7 @@ You can also preview the documentation locally before pushing to GitHub by runni
 make serve
 ```
 
-### Step 6: Create a GitHub project
+##### Step 6: Create a GitHub project
 
 1. Go to https://github.com/new and follow the instructions, being sure to NOT add a `README` or `.gitignore` file (this cookiecutter template will take care of those files for you)
 
@@ -181,15 +183,15 @@ make serve
   * Under "Source" select "Deploy from a branch"
   * Under "Branch" select "gh-pages" and "/ (root)"
 
-### Step 7: Register the schema
+##### Step 7: Register the schema
 
 See [How to register a schema](https://linkml.io/linkml/faq/contributing.html#how-do-i-register-my-schema)
 
-### Making releases
+##### Making releases
 
 See [How to Manage Releases of your LinkML Schema](https://linkml.io/linkml/howtos/manage-releases.html)
 
-## Keeping your project up to date
+##### Keeping your project up to date
 
 In order to be up-to-date with the template, first check if there is a mismatch
 between the project's boilerplate code and the template by running:
