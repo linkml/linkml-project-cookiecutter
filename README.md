@@ -1,6 +1,6 @@
 # LinkML Project Cookiecutter
 
-## PLEASE NOTE: This repository is deprecated! Instead, please consider using [linkml-project-copier](https://github.com/linkml/linkml-project-copier)
+## PLEASE NOTE: This repository is archived! Instead, please consider using [linkml-project-copier](https://github.com/linkml/linkml-project-copier)
 
 -------------------------------------------------------------------------------------------------------
 
