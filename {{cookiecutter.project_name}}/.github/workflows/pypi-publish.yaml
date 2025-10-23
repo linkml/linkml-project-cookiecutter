@@ -8,29 +8,41 @@ on:
 jobs:
   build-n-publish:
     name: Build and publish Python 🐍 distributions 📦 to PyPI
+
     runs-on: ubuntu-latest
+    # if running inside container, provide details here
+    # container: {}
+
+    strategy:
+      matrix:
+        python-version: [ "3.12" ]
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        id: setup-python
         with:
-          python-version: 3.9
+          python-version: ${{ matrix.python-version }}
 
-      - name: Install Poetry
+      - name: Install Poetry, and update path
         run: |
-          pipx install poetry
-          poetry self add "poetry-dynamic-versioning[plugin]"
+          python${{ matrix.python-version }} -m pip install --user pipx
+          python${{ matrix.python-version }} -m pipx ensurepath
+          python${{ matrix.python-version }} -m pipx install poetry
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
-      # - name: Install dependencies
-      #   run: poetry install --no-interaction
+      - name: Install dependencies
+        run: poetry self add "poetry-dynamic-versioning[plugin]"
 
       - name: Build source and wheel archives
         run: poetry build
 
       - name: Publish distribution 📦 to PyPI
-        uses: pypa/gh-action-pypi-publish@v1.2.2
+        uses: pypa/gh-action-pypi-publish@v1.13.0
         with:
           user: __token__
           password: ${{ "{{" }} secrets.{{cookiecutter.github_token_for_pypi_deployment}} {{ "}}" }}
+

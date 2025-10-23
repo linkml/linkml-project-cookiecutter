@@ -8,15 +8,15 @@ The following are required and recommended tools for using this cookiecutter and
 
   * **Python >= 3.9**
 
-    LinkML tools are mainly written in Python, so you will need a recent Python interpreter to run this generator and to use the generated project.
+    LinkML tools are mainly written in Python, so you will need a [recent Python interpreter](https://devguide.python.org/versions/) to run this generator and to use the generated project.
 
   * **pipx**
 
-    pipx is a tool for managing isolated Python-based applications. It is the recommended way to install Poetry and cruft. To install pipx follow the instructions here: https://pypa.github.io/pipx/installation/
+    pipx is a tool for managing isolated Python-based applications. It is the recommended way to install Poetry and cruft. Install pipx using [these instructions](https://pypa.github.io/pipx/installation/).
 
   * **Poetry**
 
-    Poetry is a Python project management tool. You will use it in your generated project to manage dependencies and build distribution files. The template requires poetry version 2.0 or newer. If you have pipx installed ([alternative installation methods](https://python-poetry.org/docs/#installation) are available) you can install Poetry by running:
+    Poetry is a Python project management tool. You will use it in your generated project to manage dependencies and build distribution files. The template requires poetry version 2.0 or newer. See [installation guide](https://python-poetry.org/docs/#installation), or simply use pipx:
 
      ```shell
      pipx install poetry
@@ -25,18 +25,19 @@ The following are required and recommended tools for using this cookiecutter and
     - For having both Poetry 2.x and Poetry 1.x installed at the same time,
       pipx has the option to install another version with a suffix-modified name,
       here "poetry1",
-
       ```bash
         `pipx install --suffix=1 "poetry<2.0"`.
       ```
 
-    This project manages project-level configuration. User-level [configuration](https://python-poetry.org/docs/configuration/), if needed, is your responsibility.
+    - For pipx metadata errors, see [fix](https://github.com/pypa/pipx/issues/1619#issuecomment-3416448489).
+
+    - This project manages project-level configuration. User-level [configuration](https://python-poetry.org/docs/configuration/), if needed, is your responsibility.
 
   * **Poetry private repository**
 
-    Sandboxed environments have private pypi repositories. Poetry supports project-level [repository](https://python-poetry.org/docs/repositories/), but it is recommended to configure [this plugin](https://pypi.org/project/poetry-plugin-pypi-mirror) to persist repository across all poetry projects (and avoid cookiecutter failure):
+    Sandboxed environments have private pypi repositories. Poetry supports project-level [repository](https://python-poetry.org/docs/repositories/), but [this plugin](https://pypi.org/project/poetry-plugin-pypi-mirror) is recommended as global configuration:
     ```shell
-    pip3 install poetry-plugin-pypi-mirror --user
+    pipx inject poetry poetry-plugin-pypi-mirror
     # example, add line to `~/.profile` for persistence
     export POETRY_PYPI_MIRROR_URL = "https://pypi-proxy.myorg.com/repository/pypi-all/simple"
     ```

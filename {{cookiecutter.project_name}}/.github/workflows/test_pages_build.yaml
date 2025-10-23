@@ -12,22 +12,34 @@ concurrency: {% raw %}preview-${{ github.ref }}{% endraw %}
 jobs:
   run:
     runs-on: ubuntu-latest
+    # if running inside container, provide details here
+    # container: {}
+
+    strategy:
+      matrix:
+        python-version: [ "3.12" ]
+
     steps:
-      - name: Checkout
+      - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        id: setup-python
         with:
-          fetch-depth: 0
+          python-version: ${{ matrix.python-version }}
 
-      - name: Set up Python 3
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9
+      - name: Install Poetry and update path
+        run: |
+          python${{ matrix.python-version }} -m pip install --user pipx
+          python${{ matrix.python-version }} -m pipx ensurepath
+          python${{ matrix.python-version }} -m pipx install poetry
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
-      - name: Install Poetry
-        run: pipx install poetry
-
-      - name: Install dependencies
-        run: poetry install
+      - name: Install required dependencies, plus 'docs'
+        run: |
+          poetry lock
+          poetry install -E docs
 
       - name: Build documentation
         run: |

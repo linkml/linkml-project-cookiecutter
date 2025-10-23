@@ -4,32 +4,53 @@ on:
   push:
     branches: [main]
 
+# Only allow one queued (and one in-progress) deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build-docs:
     runs-on: ubuntu-latest
+    # if running inside container, provide details here
+    # container: {}
+
+    strategy:
+      matrix:
+        python-version: [ "3.12" ]
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
       contents: write  # to let mkdocs write the new docs
       pages: write     # to deploy to Pages
-      id-token: write  # to verify the deployment originates from an appropriate source
+      id-token: write  # to verify deployment is from an appropriate source
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # otherwise, you will failed to push refs to dest repo
+          fetch-depth: 0  # otherwise, we fail to push refs to dest repo
 
-      - name: Set up Python.
-        uses: actions/setup-python@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        id: setup-python
         with:
-          python-version: 3.9
+          python-version: ${{ matrix.python-version }}
 
-      - name: Install Poetry.
-        run: pipx install poetry
+      - name: Install Poetry and update path
+        run: |
+          python${{ matrix.python-version }} -m pip install --user pipx
+          python${{ matrix.python-version }} -m pipx ensurepath
+          python${{ matrix.python-version }} -m pipx install poetry
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
-      - name: Install dependencies.
-        run: poetry install
+      - name: Install required dependencies, plus 'docs'
+        run: |
+          poetry lock
+          poetry install -E docs
 
       - name: Build documentation.
         run: |
@@ -38,3 +59,4 @@ jobs:
           make gendoc
           ([ ! -f docs/about.md ] && cp src/docs/about.md docs/) || true
           make mkd-gh-deploy
+
